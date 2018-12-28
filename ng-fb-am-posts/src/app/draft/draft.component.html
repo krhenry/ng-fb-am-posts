@@ -1,15 +1,22 @@
 <div fxLayout="column" fxLayoutAlign="center center">
+  <h2>Select Your Captains</h2>
   <mat-nav-list>
-    <mat-list-item *ngFor="let player of playerList">
+    <mat-list-item (click)="captainSelection(i, player)" *ngFor="let player of playerList; index as i">
         <a matLine>{{ player.name }}</a>
-        <button mat-icon-button>
-          <mat-icon>delete</mat-icon>
-        </button>
     </mat-list-item>
   </mat-nav-list>
-  <p>
+  <!-- <p>
     Player Count: {{ playerList?.length }}
-  </p>
+  </p> -->
 
   <!-- <button color="primary" routerLink="/draft" [disabled]="playerList?.length < 5" mat-raised-button>Draft!</button> -->
+  <div fxLayout="column" fxLayoutAlign="center center" *ngIf="captainList.length > 0">
+    <h1>Captains</h1>
+    <mat-nav-list>
+      <mat-list-item *ngFor="let captain of captainList; index as i">
+          <a matLine>{{ i + 1 }} {{ captain?.name }}</a>
+      </mat-list-item>
+    </mat-nav-list>
+    <button  color="primary" routerLink="/draft" [disabled]="captainList?.length < 3" mat-raised-button>Randomize Captain Selection Order!</button>
+  </div>
 </div>

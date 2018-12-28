@@ -13,6 +13,7 @@ export class DraftComponent implements OnInit {
 
   player = new Player();
   playerList: Player[];
+  captainList: any = [];
 
   constructor(private playerService: PlayerService) { }
 
@@ -26,6 +27,11 @@ export class DraftComponent implements OnInit {
         this.playerList.push(y as Player);
       });
     });
+  }
+
+  captainSelection(i, player) {
+    this.playerList.splice(i, 1);
+    this.captainList.push(player);
   }
 
 }
