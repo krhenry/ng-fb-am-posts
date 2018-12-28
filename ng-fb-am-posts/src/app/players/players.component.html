@@ -1,0 +1,55 @@
+<section class="new-player" fxLayout="column" fxLayoutAlign="center center">
+  <h3>Player Form</h3>
+  <form (ngSubmit)="onSubmit(playerForm)" #playerForm="ngForm">
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Name" [(ngModel)]="player.name" name="name" required>
+      </mat-form-field>
+      <mat-form-field>
+          <mat-select required placeholder="Shirt Size" [(ngModel)]="player.size" name="size">
+            <mat-option *ngFor="let size of sizes" [value]="size.value">
+              {{ size.valueView }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Phone Number" [(ngModel)]="player.phone" name="phone"  required>
+      </mat-form-field>
+      <button color="primary" mat-button type="submit">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </form>
+</section>
+
+<!-- <div fxLayout="column" fxLayoutAlign="center center">
+  <mat-selection-list #players>
+    <mat-list-option *ngFor="let player of playerList">
+      {{player.name}}
+    </mat-list-option>
+
+  </mat-selection-list>
+
+  <p>
+    Players selected: {{players.selectedOptions.selected.length}} / {{ playerList?.length }}
+  </p>
+</div> -->
+
+<div fxLayout="column" fxLayoutAlign="center center">
+  <mat-nav-list>
+    <mat-list-item *ngFor="let player of playerList">
+        <a matLine (click)="onDelete(player.$key)">{{ player.name }}</a>
+        <button (click)="onDelete(player.$key)" mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+    </mat-list-item>
+  </mat-nav-list>
+  <p>
+    Player Count: {{ playerList?.length }}
+  </p>
+
+  <button color="primary" routerLink="/draft" [disabled]="playerList?.length < 5" mat-raised-button>Draft!</button>
+</div>
+
+
+

@@ -1,0 +1,15 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <mat-nav-list>
+    <mat-list-item *ngFor="let player of playerList">
+        <a matLine>{{ player.name }}</a>
+        <button mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+    </mat-list-item>
+  </mat-nav-list>
+  <p>
+    Player Count: {{ playerList?.length }}
+  </p>
+
+  <!-- <button color="primary" routerLink="/draft" [disabled]="playerList?.length < 5" mat-raised-button>Draft!</button> -->
+</div>
