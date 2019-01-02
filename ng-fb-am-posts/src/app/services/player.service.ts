@@ -10,13 +10,15 @@ export class PlayerService {
   constructor(private firebase: AngularFireDatabase ) { }
 
   getData() {
-    this.playerList = this.firebase.list('employees');
+    // this.playerList = this.firebase.list('employees');
+    this.playerList = this.firebase.list('players');
     return this.playerList;
   }
 
   insertPlayer(player: Player) {
     this.playerList.push({
       name: player.name,
+      number: player.number,
       size: player.size,
       phone: player.phone
     });
@@ -26,6 +28,7 @@ export class PlayerService {
     this.playerList.update(player.$key,
       {
         name: player.name,
+        number: player.number,
         size: player.size,
         phone: player.phone
       });

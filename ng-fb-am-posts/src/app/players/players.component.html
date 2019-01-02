@@ -5,13 +5,16 @@
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Name" [(ngModel)]="player.name" name="name" required>
       </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Number" [(ngModel)]="player.number" name="number" required>
+      </mat-form-field>
       <mat-form-field>
-          <mat-select required placeholder="Shirt Size" [(ngModel)]="player.size" name="size">
-            <mat-option *ngFor="let size of sizes" [value]="size.value">
-              {{ size.valueView }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <mat-select required placeholder="Shirt Size" [(ngModel)]="player.size" name="size">
+          <mat-option *ngFor="let size of sizes" [value]="size.value">
+            {{ size.valueView }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Phone Number" [(ngModel)]="player.phone" name="phone"  required>
       </mat-form-field>

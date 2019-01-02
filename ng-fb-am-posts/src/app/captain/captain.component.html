@@ -1,0 +1,55 @@
+<section class="new-captain" fxLayout="column" fxLayoutAlign="center center">
+  <h3>Captain Input</h3>
+  <form (ngSubmit)="onSubmit(captainForm)" #captainForm="ngForm">
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Name" [(ngModel)]="captain.name" name="name" required>
+      </mat-form-field><br>
+      <!-- <mat-form-field>
+        <mat-select required placeholder="Clans" [(ngModel)]="captain.clan" name="clan">
+          <mat-option *ngFor="let clan of clans" [value]="clan.value">
+            {{ clan.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field><br> -->
+
+      <mat-form-field>
+        <i *ngIf="selectedClan"><img [src]="selectedClan" alt="selectedClan" style="margin-bottom: -15px"></i>
+        <mat-select [(ngModel)]="selectedClan"
+                  floatPlaceholder="Clans"
+                  placeholder="Clans"
+                  name="clan"
+                  (change)="optionSelected($event)"
+                  required>
+        <mat-option *ngFor="let clan of clans" [value]="clan">
+            <img [src]="clan.icon" [alt]="clan.viewValue">
+                {{clan.viewValue}}
+        </mat-option>
+      </mat-select>
+      </mat-form-field><br>
+
+      <mat-form-field>
+        <input matInput placeholder="Color One" [(ngModel)]="captain.color1" name="color1">
+      </mat-form-field><br>
+      <mat-form-field>
+        <input matInput placeholder="Color Two" [(ngModel)]="captain.color2" name="color2">
+      </mat-form-field><br>
+      <button color="primary" mat-button type="submit">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </div>
+  </form>
+</section>
+
+<!-- <div class="form-control form-control--center">
+  <i *ngIf="selectedIcon"><img [src]="selectedIcon" alt="selectedIcon" style="margin-bottom: -15px"></i>
+   <md-select [(ngModel)]="selectedBodystyle"
+              floatPlaceholder="never"
+              name="bodyStyle"
+              (change)="optionSelected($event)">
+      <md-option *ngFor="let bodyStyle of bodyStyles" [value]="bodyStyle">
+          <img [src]="bodyStyle.icon" [alt]="bodyStyle.viewValue">
+              {{bodyStyle.viewValue}}
+      </md-option>
+   </md-select>
+  </div> -->

@@ -56,11 +56,13 @@ export class PlayersComponent implements OnInit {
   }
 
   onSubmit(playerForm: NgForm) {
-    if (playerForm.value.$key == null) {
-      this.playerService.insertPlayer(playerForm.value);
+    if (playerForm.valid === true) {
+      if (playerForm.value.$key == null) {
+        this.playerService.insertPlayer(playerForm.value);
+      }
+      // alert('Thanks for submitting! Data: ' + JSON.stringify(this.player));
+      playerForm.resetForm();
     }
-    // alert('Thanks for submitting! Data: ' + JSON.stringify(this.player));
-    playerForm.resetForm();
   }
 
 }

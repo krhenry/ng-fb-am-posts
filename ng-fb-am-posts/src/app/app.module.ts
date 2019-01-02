@@ -16,13 +16,16 @@ import { FormsModule } from '@angular/forms';
 import { PlayerService } from './services/player.service';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { DraftComponent } from './draft/draft.component';
+import { CaptainComponent } from './captain/captain.component';
+import { CaptainService } from './services/captain.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostComponent,
     PlayersComponent,
-    DraftComponent
+    DraftComponent,
+    CaptainComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,7 @@ import { DraftComponent } from './draft/draft.component';
     FormsModule,
     FlexLayoutModule
   ],
-  providers: [PlayerService],
+  providers: [PlayerService, CaptainService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
