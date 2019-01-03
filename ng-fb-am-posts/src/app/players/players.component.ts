@@ -1,7 +1,9 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable, ViewChild, ElementRef } from '@angular/core';
 import { Player } from '../models/player.model';
 import { NgForm } from '@angular/forms';
 import { PlayerService } from '../services/player.service';
+import { MatTableDataSource } from '@angular/material';
+import { SelectionModel } from '@angular/cdk/collections';
 
 export interface Size {
   value: string;
@@ -21,18 +23,25 @@ export interface Color {
 })
 export class PlayersComponent implements OnInit {
 
+  @ViewChild('name') nameField: ElementRef;
+
   player = new Player();
   playerList: Player[];
 
   sizes: Size[] = [
-    { value: 'medium', valueView: 'M' },
-    { value: 'large', valueView: 'L' },
-    { value: 'x-large', valueView: 'XL' },
-    { value: 'xx-large', valueView: 'XXL' },
-    { value: 'xxx-large', valueView: 'XXXL' }
+    { value: 'Small', valueView: 'S' },
+    { value: 'Medium', valueView: 'M' },
+    { value: 'Large', valueView: 'L' },
+    { value: 'X-Large', valueView: 'XL' },
+    { value: 'XX-Large', valueView: 'XXL' },
+    { value: 'XXX-Large', valueView: 'XXXL' },
+    { value: 'XXXX-Large', valueView: 'XXXXL' }
   ];
 
-  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+  // displayedColumns: string[] = ['name', 'number1', 'number2', 'size', 'phone'];
+  displayedColumns: string[] = ['name', '#', 'alt #', 'size', 'phone', 'actions'];
+  dataSource = new MatTableDataSource;
+  selection = new SelectionModel<any>(true, []);
 
   constructor(private playerService: PlayerService) { }
 
@@ -45,22 +54,29 @@ export class PlayersComponent implements OnInit {
         y['$key'] = element.key;
         this.playerList.push(y as Player);
       });
+      this.dataSource = new MatTableDataSource(this.playerList);
     });
   }
 
   onDelete(key: string) {
-    if (confirm('Are you sure to delete this question ?') === true) {
+    if (confirm('Are you sure to delete this player ?') === true) {
       this.playerService.deletePlayer(key);
       // this.tostr.warning('Deleted Successfully', 'Question submit');
     }
+
+    console.log(key);
   }
 
   onSubmit(playerForm: NgForm) {
+    if (playerForm.value.number2 === undefined) {
+      playerForm.value.number2 = null;
+    }
     if (playerForm.valid === true) {
       if (playerForm.value.$key == null) {
         this.playerService.insertPlayer(playerForm.value);
       }
       // alert('Thanks for submitting! Data: ' + JSON.stringify(this.player));
+      this.nameField.nativeElement.focus();
       playerForm.resetForm();
     }
   }

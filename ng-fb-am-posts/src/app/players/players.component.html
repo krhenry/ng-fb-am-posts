@@ -3,10 +3,13 @@
   <form (ngSubmit)="onSubmit(playerForm)" #playerForm="ngForm">
     <div>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Name" [(ngModel)]="player.name" name="name" required>
+        <input autofocus matInput placeholder="Name" [(ngModel)]="player.name" #name name="name" required>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Number" [(ngModel)]="player.number" name="number" required>
+        <input matInput placeholder="#" [(ngModel)]="player.number1" name="number1" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Alt #" [(ngModel)]="player.number2" name="number2">
       </mat-form-field>
       <mat-form-field>
         <mat-select required placeholder="Shirt Size" [(ngModel)]="player.size" name="size">
@@ -38,7 +41,48 @@
   </p>
 </div> -->
 
-<div fxLayout="column" fxLayoutAlign="center center">
+<table mat-table [dataSource]="dataSource">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef='let player'> {{player.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="#">
+    <th mat-header-cell *matHeaderCellDef> # </th>
+    <td mat-cell *matCellDef='let player'> {{player.number1}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="alt #">
+    <th mat-header-cell *matHeaderCellDef> Alt # </th>
+    <td mat-cell *matCellDef='let player'> {{player.number2}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="size">
+    <th mat-header-cell *matHeaderCellDef> Size </th>
+    <td mat-cell *matCellDef='let player'> {{player.size}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef> Phone </th>
+    <td mat-cell *matCellDef='let player'> {{player.phone}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let player" >
+      <!-- <a matLine (click)="onDelete(player.$key)">{{ player.name }}</a> -->
+      <button (click)="onDelete(player.$key)" mat-icon-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<!-- <div fxLayout="column" fxLayoutAlign="center center">
   <mat-nav-list>
     <mat-list-item *ngFor="let player of playerList">
         <a matLine (click)="onDelete(player.$key)">{{ player.name }}</a>
@@ -52,7 +96,7 @@
   </p>
 
   <button color="primary" routerLink="/draft" [disabled]="playerList?.length < 5" mat-raised-button>Draft!</button>
-</div>
+</div> -->
 
 
 

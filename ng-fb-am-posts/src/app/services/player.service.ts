@@ -18,7 +18,8 @@ export class PlayerService {
   insertPlayer(player: Player) {
     this.playerList.push({
       name: player.name,
-      number: player.number,
+      number1: player.number1,
+      number2: player.number2,
       size: player.size,
       phone: player.phone
     });
@@ -28,7 +29,8 @@ export class PlayerService {
     this.playerList.update(player.$key,
       {
         name: player.name,
-        number: player.number,
+        number1: player.number1,
+        number2: player.number2,
         size: player.size,
         phone: player.phone
       });

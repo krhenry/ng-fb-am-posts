@@ -35,6 +35,15 @@ export class CaptainComponent implements OnInit {
   constructor(private captainService: CaptainService) { }
 
   ngOnInit() {
+    const x = this.captainService.getData();
+    x.snapshotChanges().subscribe(item => {
+      this.captainList = [];
+      item.forEach(element => {
+        const y = element.payload.toJSON();
+        y['$key'] = element.key;
+        this.captainList.push(y as Captain);
+      });
+    });
   }
 
   onSubmit(captainForm: NgForm) {
