@@ -1,17 +1,10 @@
-<section class="new-captain" fxLayout="column" fxLayoutAlign="center center">
+<!-- <section class="new-captain" fxLayout="column" fxLayoutAlign="center center">
   <h3>Captain Input</h3>
   <form (ngSubmit)="onSubmit(captainForm)" #captainForm="ngForm">
     <div>
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Name" [(ngModel)]="captain.name" name="name" required>
-      </mat-form-field><br>
-      <!-- <mat-form-field>
-        <mat-select required placeholder="Clans" [(ngModel)]="captain.clan" name="clan">
-          <mat-option *ngFor="let clan of clans" [value]="clan.value">
-            {{ clan.value }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field><br> -->
+      </mat-form-field>
 
       <mat-form-field>
         <i *ngIf="selectedClan"><img [src]="selectedClan" alt="selectedClan" style="margin-bottom: -15px"></i>
@@ -26,30 +19,89 @@
                 {{clan.viewValue}}
         </mat-option>
       </mat-select>
-      </mat-form-field><br>
-
+      </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Color One" [(ngModel)]="captain.color1" name="color1">
-      </mat-form-field><br>
+      </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Color Two" [(ngModel)]="captain.color2" name="color2">
-      </mat-form-field><br>
+      </mat-form-field>
       <button color="primary" mat-button type="submit">
         <mat-icon>add_circle</mat-icon>
       </button>
     </div>
   </form>
-</section>
+</section> -->
 
-<!-- <div class="form-control form-control--center">
-  <i *ngIf="selectedIcon"><img [src]="selectedIcon" alt="selectedIcon" style="margin-bottom: -15px"></i>
-   <md-select [(ngModel)]="selectedBodystyle"
-              floatPlaceholder="never"
-              name="bodyStyle"
-              (change)="optionSelected($event)">
-      <md-option *ngFor="let bodyStyle of bodyStyles" [value]="bodyStyle">
-          <img [src]="bodyStyle.icon" [alt]="bodyStyle.viewValue">
-              {{bodyStyle.viewValue}}
-      </md-option>
-   </md-select>
-  </div> -->
+
+
+
+  <!-- <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+        bred for hunting.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card> -->
+
+<div>
+  <h3>Select Your Captains</h3>
+  <button mat-raised-button (click)="captainConfirm()" color="primary">Confirm Captains</button>
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <!-- <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox> -->
+      </th>
+      <!-- <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="isSelected()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td> -->
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="isSelected(row)"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef='let player'> {{player.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef> Phone </th>
+      <td mat-cell *matCellDef='let player'> {{player.phone}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <button mat-raised-button (click)="captainConfirm()" color="primary">Confirm Captains</button>
+</div>
+
+
+
+
+
+
+
+

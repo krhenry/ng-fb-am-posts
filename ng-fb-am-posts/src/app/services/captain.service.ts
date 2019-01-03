@@ -16,21 +16,22 @@ export class CaptainService {
   }
 
   insertCaptain(captain: Captain) {
+    console.log(captain);
     this.CaptainList.push({
-      name: captain.name,
-      clan: captain.clan,
-      color1: captain.color1,
-      color2: captain.color2
+      name: captain// ,
+      // clan: captain.clan,
+      // color1: captain.color1,
+      // color2: captain.color2
     });
   }
 
   updateCaptain(captain: Captain) {
     this.CaptainList.update(captain.$key,
       {
-        name: captain.name,
-        clan: captain.clan,
-        color1: captain.color1,
-        color2: captain.color2
+        name: captain.name// ,
+        // clan: captain.clan,
+        // color1: captain.color1,
+        // color2: captain.color2
       });
   }
 

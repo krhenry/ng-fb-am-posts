@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Captain } from '../models/captain.model';
 import { CaptainService } from '../services/captain.service';
+import { PlayerService } from '../services/player.service';
+import { Player } from '../models/player.model';
+import { MatTableDataSource } from '@angular/material';
+import { SelectionModel } from '@angular/cdk/collections';
+import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-captain',
@@ -13,7 +18,17 @@ export class CaptainComponent implements OnInit {
   captain = new Captain();
   captainList: Captain[];
 
+  player = new Player();
+  playerList: Player[];
+
+  selectedCaptainList: Array<any> = [];
+  finalCaptainCount: [];
+
   clanss: string[] = ['Bears', 'Wolves', 'Snipes', 'Turtles', 'Deer', 'Beaver', 'Eel'];
+
+  displayedColumns: string[] = ['select', 'name', 'phone'];
+  dataSource = new MatTableDataSource;
+  selection = new SelectionModel<any>(true, []);
 
   selectedClan: string;
   selectedIcon;
@@ -28,22 +43,35 @@ export class CaptainComponent implements OnInit {
   ];
 
   optionSelected(event) {
-    // console.log(event.value.icon);
     this.selectedIcon = event.value.icon;
   }
 
-  constructor(private captainService: CaptainService) { }
+  constructor(private captainService: CaptainService, private playerService: PlayerService) { }
 
   ngOnInit() {
-    const x = this.captainService.getData();
-    x.snapshotChanges().subscribe(item => {
+    const c = this.captainService.getData();
+    const p = this.playerService.getData();
+    c.snapshotChanges().subscribe(item => {
       this.captainList = [];
       item.forEach(element => {
-        const y = element.payload.toJSON();
-        y['$key'] = element.key;
-        this.captainList.push(y as Captain);
+        const a = element.payload.toJSON();
+        a['$key'] = element.key;
+        this.captainList.push(a as Captain);
       });
     });
+    p.snapshotChanges().subscribe(item => {
+      this.playerList = [];
+      item.forEach(element => {
+        const b = element.payload.toJSON();
+        b['$key'] = element.key;
+        this.playerList.push(b as Player);
+      });
+      this.dataSource = new MatTableDataSource(this.playerList);
+    });
+  }
+
+  isSelected(player) {
+    this.selectedCaptainList.push(player.name);
   }
 
   onSubmit(captainForm: NgForm) {
@@ -51,22 +79,20 @@ export class CaptainComponent implements OnInit {
       if (captainForm.value.$key == null) {
         this.captainService.insertCaptain(captainForm.value);
       }
-      // alert('Thanks for submitting! Data: ' + JSON.stringify(this.player));
       captainForm.resetForm();
     }
   }
 
+  captainConfirm() {
+    let i = 0;
+
+    if (confirm('Are you sure to add these players as captains? ?' + this.selectedCaptainList) === true) {
+      // this.captainService.insertCaptain(key);
+      // this.tostr.warning('Deleted Successfully', 'Question submit');
+      for (i; i < this.selectedCaptainList.length; i++) {
+        this.captainService.insertCaptain(this.selectedCaptainList[i]);
+      }
+    }
+  }
+
 }
-
-// selectedBodystyle: string;
-//   selectedIcon;
-//   bodyStyles = [
-//     { value: 'Mercedez' , viewValue: 'Mercedez', icon: "http://lorempixel.com/40/40/transport/" },
-//     { value: 'Ferrari'  , viewValue: 'Ferrari' , icon: "http://lorempixel.com/30/30/transport/" },
-//     { value: 'BMW'      , viewValue: 'BMW'     , icon: "http://lorempixel.com/50/50/transport/" }
-//   ];
-
-//   optionSelected(event){
-//     // console.log(event.value.icon);
-//     this.selectedIcon = event.value.icon;
-//   }

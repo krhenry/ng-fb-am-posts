@@ -63,8 +63,6 @@ export class PlayersComponent implements OnInit {
       this.playerService.deletePlayer(key);
       // this.tostr.warning('Deleted Successfully', 'Question submit');
     }
-
-    console.log(key);
   }
 
   onSubmit(playerForm: NgForm) {
