@@ -10,13 +10,23 @@ export class ArraySortPipe implements PipeTransform {
     if (!Array.isArray(array)) {
       return;
     }
+    // array.sort((a: any, b: any) => {
+    //   if (a[field] < b[field]) {
+    //     return -1;
+    //   } else if (a[field] > b[field]) {
+    //     return 1;
+    //   } else {
+    //     return 0;
+    //   }
+    // });
+
     array.sort((a: any, b: any) => {
-      if (a[field] < b[field]) {
+      if (a[field] > b[field]) {
         return -1;
       } else if (a[field] > b[field]) {
-        return 1;
-      } else {
         return 0;
+      } else {
+        return 1;
       }
     });
     return array;
