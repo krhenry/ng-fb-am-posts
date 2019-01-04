@@ -39,4 +39,8 @@ export class CaptainService {
     this.CaptainList.remove($key);
   }
 
+  deleteAllCaptains() {
+    this.CaptainList.remove();
+  }
+
 }

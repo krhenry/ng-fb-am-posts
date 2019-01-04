@@ -39,7 +39,7 @@ export class PlayersComponent implements OnInit {
   ];
 
   // displayedColumns: string[] = ['name', 'number1', 'number2', 'size', 'phone'];
-  displayedColumns: string[] = ['name', '#', 'alt #', 'size', 'phone', 'actions'];
+  displayedColumns: string[] = ['name', 'stars', '#', 'alt #', 'size', 'phone', 'actions'];
   dataSource = new MatTableDataSource;
   selection = new SelectionModel<any>(true, []);
 

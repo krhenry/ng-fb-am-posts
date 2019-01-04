@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Pipe, PipeTransform } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Captain } from '../models/captain.model';
 import { CaptainService } from '../services/captain.service';
@@ -7,6 +7,7 @@ import { Player } from '../models/player.model';
 import { MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { element } from '@angular/core/src/render3';
+import { orderBy } from 'lodash';
 
 @Component({
   selector: 'app-captain',
@@ -14,6 +15,8 @@ import { element } from '@angular/core/src/render3';
   styleUrls: ['./captain.component.css']
 })
 export class CaptainComponent implements OnInit {
+
+  captainsSelected: boolean;
 
   captain = new Captain();
   captainList: Captain[];
@@ -58,6 +61,11 @@ export class CaptainComponent implements OnInit {
         a['$key'] = element.key;
         this.captainList.push(a as Captain);
       });
+      if (this.captainList.length > 0) {
+        this.captainsSelected = true;
+      } else {
+        this.captainsSelected = false;
+      }
     });
     p.snapshotChanges().subscribe(item => {
       this.playerList = [];
@@ -92,6 +100,16 @@ export class CaptainComponent implements OnInit {
       for (i; i < this.selectedCaptainList.length; i++) {
         this.captainService.insertCaptain(this.selectedCaptainList[i]);
       }
+      this.captainsSelected = true;
+    }
+  }
+
+  resetCaptains() {
+    if (confirm('Are you sure to reset the captains? ' + this.selectedCaptainList) === true) {
+      // this.captainService.insertCaptain(key);
+      // this.tostr.warning('Deleted Successfully', 'Question submit');
+      this.captainsSelected = false;
+      this.captainService.deleteAllCaptains();
     }
   }
 

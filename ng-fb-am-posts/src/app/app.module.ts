@@ -15,9 +15,10 @@ import { PlayersComponent } from './players/players.component';
 import { FormsModule } from '@angular/forms';
 import { PlayerService } from './services/player.service';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { DraftComponent } from './draft/draft.component';
+import { DraftComponent, ArraySortPipe } from './draft/draft.component';
 import { CaptainComponent } from './captain/captain.component';
 import { CaptainService } from './services/captain.service';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CaptainService } from './services/captain.service';
     PostComponent,
     PlayersComponent,
     DraftComponent,
-    CaptainComponent
+    CaptainComponent,
+    ArraySortPipe
   ],
   imports: [
     BrowserModule,

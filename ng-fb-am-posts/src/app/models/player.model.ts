@@ -5,4 +5,5 @@ export class Player {
   number2: string;
   size: string;
   phone: string;
+  stars: string;
 }

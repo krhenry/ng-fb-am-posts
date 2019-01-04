@@ -21,7 +21,8 @@ export class PlayerService {
       number1: player.number1,
       number2: player.number2,
       size: player.size,
-      phone: player.phone
+      phone: player.phone,
+      stars: player.stars
     });
   }
 
@@ -32,7 +33,8 @@ export class PlayerService {
         number1: player.number1,
         number2: player.number2,
         size: player.size,
-        phone: player.phone
+        phone: player.phone,
+        stars: player.stars
       });
   }
 

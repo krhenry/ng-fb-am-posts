@@ -6,6 +6,9 @@
         <input autofocus matInput placeholder="Name" [(ngModel)]="player.name" #name name="name" required>
       </mat-form-field>
       <mat-form-field class="example-full-width">
+          <input autofocus matInput placeholder="Stars" [(ngModel)]="player.stars" #name name="stars" required>
+        </mat-form-field>
+      <mat-form-field class="example-full-width">
         <input matInput placeholder="#" [(ngModel)]="player.number1" name="number1" required>
       </mat-form-field>
       <mat-form-field class="example-full-width">
@@ -27,6 +30,9 @@
     </div>
   </form>
 </section>
+<section fxLayout="column" fxLayoutAlign="center center">
+  <h6>Player Count: {{ playerList?.length }}</h6>
+</section>
 
 <!-- <div fxLayout="column" fxLayoutAlign="center center">
   <mat-selection-list #players>
@@ -46,6 +52,11 @@
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name </th>
     <td mat-cell *matCellDef='let player'> {{player.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="stars">
+    <th mat-header-cell *matHeaderCellDef> Stars </th>
+    <td mat-cell *matCellDef='let player'> {{player.stars}} </td>
   </ng-container>
 
   <ng-container matColumnDef="#">
