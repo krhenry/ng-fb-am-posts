@@ -119,6 +119,11 @@
         </p>
       </mat-card-content>
       <mat-card-actions>
+        <mat-select placeholder="Clans">
+          <mat-option (click)="clanSelected(captain, clan.value)" *ngFor="let clan of clans" [value]="clan.value">
+            {{ clan.viewValue }}
+          </mat-option>
+        </mat-select>
         <button mat-button>LIKE</button>
         <button mat-button>SHARE</button>
       </mat-card-actions>

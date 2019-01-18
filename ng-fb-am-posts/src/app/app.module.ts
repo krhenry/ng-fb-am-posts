@@ -18,6 +18,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { DraftComponent, ArraySortPipe } from './draft/draft.component';
 import { CaptainComponent } from './captain/captain.component';
 import { CaptainService } from './services/captain.service';
+import { TeamsComponent } from './teams/teams.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { CaptainService } from './services/captain.service';
     PlayersComponent,
     DraftComponent,
     CaptainComponent,
-    ArraySortPipe
+    ArraySortPipe,
+    TeamsComponent,
+    ScheduleComponent
   ],
   imports: [
     BrowserModule,

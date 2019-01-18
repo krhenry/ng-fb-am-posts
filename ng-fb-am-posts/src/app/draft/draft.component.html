@@ -1,8 +1,18 @@
 <div fxLayout="column" fxLayoutAlign="center center">
-  <h2>Draft Helper.. for now</h2>
-  <mat-nav-list>
-    <mat-list-item (click)="captainSelection(i, player)" *ngFor="let player of playerList | sort: 'stars'; index as i">
-        <a matLine>{{ player.name }} | <b>{{ player.stars }}</b></a>
+  <h2>Number of Rounds: {{ draftRoundsDisplay }}</h2>
+</div>
+<div>
+  <h3 fxLayout="column" fxLayoutAlign="center center">Captains</h3>
+  <p *ngFor="let captain of captainList">{{ captain.name }}</p>
+</div>
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h1>Round: {{ round }}</h1> {{ availPlayerCount }}
+</div>
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h2>Available Players ( {{ playerList?.length }} )</h2>
+  <mat-nav-list *ngIf="availableListLoaded == true">
+    <mat-list-item (click)="playerSelection(i, player)" *ngFor="let player of playerList | sort: 'stars'; index as i">
+        <a matLine>{{ player?.name }} | <b>{{ player?.stars }}</b></a>
     </mat-list-item>
   </mat-nav-list>
   <!-- <p>

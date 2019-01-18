@@ -9,6 +9,11 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { element } from '@angular/core/src/render3';
 import { orderBy } from 'lodash';
 
+export interface Clan {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-captain',
   templateUrl: './captain.component.html',
@@ -35,18 +40,22 @@ export class CaptainComponent implements OnInit {
 
   selectedClan: string;
   selectedIcon;
-  clans = [
-    { value: 'Bears' , viewValue: 'Bears', icon: "http://lorempixel.com/40/40/transport/" },
-    { value: 'Wolves' , viewValue: 'Wolves', icon: "http://lorempixel.com/40/40/transport/" },
-    { value: 'Snipes' , viewValue: 'Snipes', icon: "http://lorempixel.com/40/40/transport/" },
-    { value: 'Turtles' , viewValue: 'Turtles', icon: "http://lorempixel.com/40/40/transport/" },
-    { value: 'Deer' , viewValue: 'Deer', icon: '../../assets/img/deer.jpg' },
-    { value: 'Beaver' , viewValue: 'Beaver', icon: "http://lorempixel.com/40/40/transport/" },
-    { value: 'Eel' , viewValue: 'Eel', icon: "http://lorempixel.com/40/40/transport/" },
+  clans: Clan[] = [
+    { value: 'Bears' , viewValue: 'Bears' },
+    { value: 'Wolves' , viewValue: 'Wolves' },
+    { value: 'Snipes' , viewValue: 'Snipes'},
+    { value: 'Turtles' , viewValue: 'Turtles' },
+    { value: 'Deer' , viewValue: 'Deer' },
+    { value: 'Beaver' , viewValue: 'Beaver'},
+    { value: 'Eel' , viewValue: 'Eel' }
   ];
 
   optionSelected(event) {
     this.selectedIcon = event.value.icon;
+  }
+
+  clanSelected(captain, clan) {
+    this.captainService.updateCaptain(captain.$key, clan);
   }
 
   constructor(private captainService: CaptainService, private playerService: PlayerService) { }
