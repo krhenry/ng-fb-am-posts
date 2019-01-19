@@ -3,7 +3,26 @@
 </div>
 <div>
   <h3 fxLayout="column" fxLayoutAlign="center center">Captains</h3>
-  <p *ngFor="let captain of captainList">{{ captain.name }}</p>
+  <!-- <p *ngFor="let captain of captainList">{{ captain.name }}</p> -->
+  <mat-nav-list>
+    <mat-list-item (click)="draftOrderClick(i, captain)" *ngFor="let captain of captainList; index as i">
+        <a matLine>{{ captain?.name }}</a>
+    </mat-list-item>
+  </mat-nav-list>
+</div>
+<!-- <div *ngIf="startDraft == true">
+  <button mat-button (click)="startDraft == false">Start Draft</button>
+</div> -->
+<div *ngIf="startDraft == true" fxLayout="column" fxLayoutAlign="center center">
+  <button mat-raised-button (click)="startDraft == false" color="primary">Start Draft</button>
+</div>
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h1>Draft Order: {{ draftOrder }}</h1>
+  <ol>
+    <li *ngFor="let draft of draftOrder">
+      {{ draft }}
+    </li>
+  </ol>
 </div>
 <div fxLayout="column" fxLayoutAlign="center center">
   <h1>Round: {{ round }}</h1> {{ availPlayerCount }}

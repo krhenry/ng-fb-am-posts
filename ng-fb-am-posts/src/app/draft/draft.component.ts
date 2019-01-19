@@ -52,6 +52,11 @@ export class DraftComponent implements OnInit {
 
   teams: Array<any> = [];
 
+  draftOrder: any = [];
+  draftClick = 0;
+
+  startDraft = false;
+
   constructor(private playerService: PlayerService, private captainService: CaptainService) { }
 
   ngOnInit() {
@@ -82,7 +87,7 @@ export class DraftComponent implements OnInit {
         }
         this.availableListLoaded = true;
         this.draftRoundsDisplay = Math.ceil(this.playerList.length / this.captainList.length);
-        console.log(this.captainList);
+        // console.log(this.captainList);
         // this.createTeamArr();
       });
     });
@@ -97,8 +102,16 @@ export class DraftComponent implements OnInit {
       //   this.teams[this.captainList[i].clan].push(this.captainList[i].name);
       // }
     }
-    console.log(this.teams);
+    // console.log(this.teams);
+  }
 
+  draftOrderClick(i, clan) {
+    this.draftClick += 1;
+    this.draftOrder.push(clan.clan);
+
+    if (this.draftClick === this.playerList.length) {
+      this.startDraft = true;
+    }
   }
 
 
