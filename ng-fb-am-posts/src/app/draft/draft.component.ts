@@ -141,7 +141,7 @@ export class DraftComponent implements OnInit {
     // console.log(this.draftOrder[0]);
     // console.log(this.teams[this.captainList[this.draftIndex].clan]);
     // console.log(Object.keys(this.teams['Beaver']));
-    console.log(this.teams[this.captainList[this.draftIndex].clan]);
+    // console.log(this.teams[this.captainList[this.draftIndex].clan]);
     console.log(this.teams[this.draftOrder[0]]);
     console.log(Object.keys(this.teams));
     console.log(Object.keys(this.teams['Beaver']));
