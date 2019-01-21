@@ -54,6 +54,7 @@ export class DraftComponent implements OnInit {
 
   draftOrder: any = [];
   draftClick = 0;
+  draftIndex = 0;
 
   startDraft = false;
 
@@ -102,14 +103,28 @@ export class DraftComponent implements OnInit {
       //   this.teams[this.captainList[i].clan].push(this.captainList[i].name);
       // }
     }
-    // console.log(this.teams);
+    console.log(this.teams);
+    console.log(this.teams['Bears']);
   }
 
-  draftOrderClick(i, clan) {
-    this.draftClick += 1;
-    this.draftOrder.push(clan.clan);
+  startDraftClick() {
+    this.startDraft = false;
+  }
 
-    if (this.draftClick === this.playerList.length) {
+  draftOrderClick(i, captain) {
+    this.draftClick += 1;
+    // this.draftOrder.push(captain.clan);
+
+    this.draftOrder.push({
+      clan: captain.clan,
+      name: captain.name
+    });
+
+    // if (this.draftClick === this.playerList.length) {
+    //   this.startDraft = true;
+    // }
+
+    if (this.draftClick > 4) {
       this.startDraft = true;
     }
   }
@@ -118,10 +133,45 @@ export class DraftComponent implements OnInit {
   playerSelection(i, player) {
     this.availPlayerCount += 1;
     this.playerList.splice(i, 1);
-    // this.captainList.push(player);
+
     if (this.availPlayerCount % this.captainList.length ===  0) {
       this.round += 1;
     }
+
+    // console.log(this.draftOrder[0]);
+    // console.log(this.teams[this.captainList[this.draftIndex].clan]);
+    // console.log(Object.keys(this.teams['Beaver']));
+    console.log(this.teams[this.captainList[this.draftIndex].clan]);
+    console.log(this.teams[this.draftOrder[0]]);
+    console.log(Object.keys(this.teams));
+    console.log(Object.keys(this.teams['Beaver']));
+    // console.log(this.teams[0]);
+    // // console.log(Object.keys(this.teams[0]));
+    // console.log(this.teams[0]);
+    // console.log(this.teams['Beaver'].constructor.name);
+    // console.log(this.teams['' + this.draftOrder[this.draftIndex] + '']);
+
+    console.log(this.draftOrder);
+    console.log(this.draftOrder.clan);
+
+    // for (let i = 0; i < this.draftOrder.length; i++) {
+    //   // if (this.draftOrder[i] === this.teams[this.captainList[this.draftIndex].clan]) {
+    //   //   this.teams[this.captainList[this.draftIndex].clan].push(player.name);
+    //   // }
+    // }
+    this.teams['' + this.draftOrder[this.draftIndex].clan + ''].push(player.name);
+
+    // for (let i = 0; i < this.draftOrder.length; i++) {
+    //   if (this.draftOrder[i].name === this.teams[this.draftOrder]) {
+    //     this.teams[this.captainList[this.draftIndex].clan].push(player.name);
+    //   }
+    // }
+
+    // this.teams[this.captainList[this.draftIndex].clan].push(player.name);
+    // this.teams[this.draftOrder[this.draftIndex].clan].push(player.name);
+    // console.log(this.teams[this.draftOrder]);
+
+    this.draftIndex += 1;
   }
 
 }

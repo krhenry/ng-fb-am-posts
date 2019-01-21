@@ -10,17 +10,53 @@
     </mat-list-item>
   </mat-nav-list>
 </div>
+
+
+
+<div *ngFor="let beaver of teams['Beaver']; index as i;">
+ {{ beaver }}
+</div><br>
+<div *ngFor="let wolves of teams['Wolves']; index as i;">
+  {{ wolves }}
+ </div><br>
+ <div *ngFor="let snipes of teams['Snipes']; index as i;">
+  {{ snipes }}
+ </div><br>
+ <div *ngFor="let deer of teams['Deer']; index as i;">
+  {{ deer }}
+ </div><br>
+ <div *ngFor="let bears of teams['Bears']; index as i;">
+  {{ bears }}
+ </div><br>
+
+<h3>sep</h3>
+<!--
+<div *ngFor="let clan of teams[captainList[i].clan]; index as i;">
+  <div *ngFor="let team of teams[clan]">
+    {{ team }}
+  </div>
+</div> -->
+
+
+<h3>sep2</h3>
+
+<div *ngFor="let a of teams; index as i;">
+  {{ a }}
+</div>
+
+
+
 <!-- <div *ngIf="startDraft == true">
   <button mat-button (click)="startDraft == false">Start Draft</button>
 </div> -->
 <div *ngIf="startDraft == true" fxLayout="column" fxLayoutAlign="center center">
-  <button mat-raised-button (click)="startDraft == false" color="primary">Start Draft</button>
+  <button mat-raised-button (click)="startDraftClick()" color="primary">Start Draft</button>
 </div>
 <div fxLayout="column" fxLayoutAlign="center center">
   <h1>Draft Order: {{ draftOrder }}</h1>
   <ol>
     <li *ngFor="let draft of draftOrder">
-      {{ draft }}
+      {{ draft.clan }}
     </li>
   </ol>
 </div>
