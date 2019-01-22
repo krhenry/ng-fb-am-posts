@@ -37,7 +37,6 @@ export class DraftComponent implements OnInit {
 
   player = new Player();
   playerList: Player[];
-  // captainList: any = [];
   captainList: Captain[];
 
   draftRoundsDisplay: Number; // Displays how many rounds there are
@@ -57,6 +56,8 @@ export class DraftComponent implements OnInit {
   draftIndex = 0;
 
   startDraft = false;
+
+  draftOrderFinalized = false;
 
   constructor(private playerService: PlayerService, private captainService: CaptainService) { }
 
@@ -80,7 +81,6 @@ export class DraftComponent implements OnInit {
         this.createTeamArr();
         for (let i = 0; i < this.playerList.length; i++) {
           for (let j = 0; j < this.captainList.length; j++) {
-            // console.log(this.captainList[j].clan);
             if (this.playerList[i].name === this.captainList[j].name) {
               this.playerList.splice(i, 1);
             }
@@ -88,8 +88,6 @@ export class DraftComponent implements OnInit {
         }
         this.availableListLoaded = true;
         this.draftRoundsDisplay = Math.ceil(this.playerList.length / this.captainList.length);
-        // console.log(this.captainList);
-        // this.createTeamArr();
       });
     });
   }
@@ -98,31 +96,21 @@ export class DraftComponent implements OnInit {
     for (let i = 0; i < this.captainList.length; i++) {
       this.teams[this.captainList[i].clan] = [];
       this.teams[this.captainList[i].clan].push(this.captainList[i].name);
-      // console.log(this.teams[this.captainList[i].clan], this.captainList[i].clan);
-      // if (this.captainList[i].clan === this.teams[this.captainList[i].clan]) {
-      //   this.teams[this.captainList[i].clan].push(this.captainList[i].name);
-      // }
     }
-    console.log(this.teams);
-    console.log(this.teams['Bears']);
   }
 
   startDraftClick() {
     this.startDraft = false;
+    this.draftOrderFinalized = true;
   }
 
   draftOrderClick(i, captain) {
     this.draftClick += 1;
-    // this.draftOrder.push(captain.clan);
 
     this.draftOrder.push({
       clan: captain.clan,
       name: captain.name
     });
-
-    // if (this.draftClick === this.playerList.length) {
-    //   this.startDraft = true;
-    // }
 
     if (this.draftClick > 4) {
       this.startDraft = true;
@@ -138,38 +126,7 @@ export class DraftComponent implements OnInit {
       this.round += 1;
     }
 
-    // console.log(this.draftOrder[0]);
-    // console.log(this.teams[this.captainList[this.draftIndex].clan]);
-    // console.log(Object.keys(this.teams['Beaver']));
-    // console.log(this.teams[this.captainList[this.draftIndex].clan]);
-    console.log(this.teams[this.draftOrder[0]]);
-    console.log(Object.keys(this.teams));
-    console.log(Object.keys(this.teams['Beaver']));
-    // console.log(this.teams[0]);
-    // // console.log(Object.keys(this.teams[0]));
-    // console.log(this.teams[0]);
-    // console.log(this.teams['Beaver'].constructor.name);
-    // console.log(this.teams['' + this.draftOrder[this.draftIndex] + '']);
-
-    console.log(this.draftOrder);
-    console.log(this.draftOrder.clan);
-
-    // for (let i = 0; i < this.draftOrder.length; i++) {
-    //   // if (this.draftOrder[i] === this.teams[this.captainList[this.draftIndex].clan]) {
-    //   //   this.teams[this.captainList[this.draftIndex].clan].push(player.name);
-    //   // }
-    // }
     this.teams['' + this.draftOrder[this.draftIndex].clan + ''].push(player.name);
-
-    // for (let i = 0; i < this.draftOrder.length; i++) {
-    //   if (this.draftOrder[i].name === this.teams[this.draftOrder]) {
-    //     this.teams[this.captainList[this.draftIndex].clan].push(player.name);
-    //   }
-    // }
-
-    // this.teams[this.captainList[this.draftIndex].clan].push(player.name);
-    // this.teams[this.draftOrder[this.draftIndex].clan].push(player.name);
-    // console.log(this.teams[this.draftOrder]);
 
     this.draftIndex += 1;
   }

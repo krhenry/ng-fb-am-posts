@@ -1,8 +1,8 @@
 <div fxLayout="column" fxLayoutAlign="center center">
   <h2>Number of Rounds: {{ draftRoundsDisplay }}</h2>
 </div>
-<div>
-  <h3 fxLayout="column" fxLayoutAlign="center center">Captains</h3>
+<div *ngIf="draftOrderFinalized == false" fxLayout="column" fxLayoutAlign="center center">
+  <h3>Select Drafting Order</h3>
   <!-- <p *ngFor="let captain of captainList">{{ captain.name }}</p> -->
   <mat-nav-list>
     <mat-list-item (click)="draftOrderClick(i, captain)" *ngFor="let captain of captainList; index as i">
@@ -12,37 +12,30 @@
 </div>
 
 
+<div *ngIf="draftOrderFinalized == true">
+  <div *ngFor="let beaver of teams['Beaver']; index as i;">
+  {{ beaver }}
+  </div><br>
+  <div *ngFor="let wolves of teams['Wolves']; index as i;">
+    {{ wolves }}
+  </div><br>
+  <div *ngFor="let snipes of teams['Snipes']; index as i;">
+    {{ snipes }}
+  </div><br>
+  <div *ngFor="let deer of teams['Deer']; index as i;">
+    {{ deer }}
+  </div><br>
+  <div *ngFor="let bears of teams['Bears']; index as i;">
+    {{ bears }}
+  </div><br>
+</div>
 
-<div *ngFor="let beaver of teams['Beaver']; index as i;">
- {{ beaver }}
-</div><br>
-<div *ngFor="let wolves of teams['Wolves']; index as i;">
-  {{ wolves }}
- </div><br>
- <div *ngFor="let snipes of teams['Snipes']; index as i;">
-  {{ snipes }}
- </div><br>
- <div *ngFor="let deer of teams['Deer']; index as i;">
-  {{ deer }}
- </div><br>
- <div *ngFor="let bears of teams['Bears']; index as i;">
-  {{ bears }}
- </div><br>
-
-<h3>sep</h3>
 <!--
 <div *ngFor="let clan of teams[captainList[i].clan]; index as i;">
   <div *ngFor="let team of teams[clan]">
     {{ team }}
   </div>
 </div> -->
-
-
-<h3>sep2</h3>
-
-<div *ngFor="let a of teams; index as i;">
-  {{ a }}
-</div>
 
 
 
@@ -61,11 +54,11 @@
   </ol>
 </div>
 <div fxLayout="column" fxLayoutAlign="center center">
-  <h1>Round: {{ round }}</h1> {{ availPlayerCount }}
+  <h1>Round: {{ round }}</h1>
 </div>
 <div fxLayout="column" fxLayoutAlign="center center">
   <h2>Available Players ( {{ playerList?.length }} )</h2>
-  <mat-nav-list *ngIf="availableListLoaded == true">
+  <mat-nav-list *ngIf="availableListLoaded == true && draftOrderFinalized == true">
     <mat-list-item (click)="playerSelection(i, player)" *ngFor="let player of playerList | sort: 'stars'; index as i">
         <a matLine>{{ player?.name }} | <b>{{ player?.stars }}</b></a>
     </mat-list-item>
