@@ -126,6 +126,10 @@ export class DraftComponent implements OnInit {
       this.round += 1;
     }
 
+    console.log(this.teams);
+    console.log(this.captainList);
+    console.log(this.teams);
+
     this.teams['' + this.draftOrder[this.draftIndex].clan + ''].push(player.name);
 
     this.draftIndex += 1;

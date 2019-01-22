@@ -11,23 +11,22 @@
   </mat-nav-list>
 </div>
 
-
 <div *ngIf="draftOrderFinalized == true">
   <div *ngFor="let beaver of teams['Beaver']; index as i;">
   {{ beaver }}
-  </div><br>
+  </div>
   <div *ngFor="let wolves of teams['Wolves']; index as i;">
     {{ wolves }}
-  </div><br>
+  </div>
   <div *ngFor="let snipes of teams['Snipes']; index as i;">
     {{ snipes }}
-  </div><br>
+  </div>
   <div *ngFor="let deer of teams['Deer']; index as i;">
     {{ deer }}
-  </div><br>
+  </div>
   <div *ngFor="let bears of teams['Bears']; index as i;">
     {{ bears }}
-  </div><br>
+  </div>
 </div>
 
 <!--
