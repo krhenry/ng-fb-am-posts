@@ -1,79 +1,84 @@
-<div fxLayout="column" fxLayoutAlign="center center">
-  <h2>Number of Rounds: {{ draftRoundsDisplay }}</h2>
+<div style="margin-top: 100px;" fxLayout="column" fxLayoutAlign="center center" *ngIf="pageloaded == false">
+  <mat-spinner></mat-spinner>
 </div>
-<div *ngIf="draftOrderFinalized == false" fxLayout="column" fxLayoutAlign="center center">
-  <h3>Select Drafting Order</h3>
-  <!-- <p *ngFor="let captain of captainList">{{ captain.name }}</p> -->
-  <mat-nav-list>
-    <mat-list-item (click)="draftOrderClick(i, captain)" *ngFor="let captain of captainList; index as i">
-        <a matLine>{{ captain?.name }}</a>
-    </mat-list-item>
-  </mat-nav-list>
-</div>
-
-<div *ngIf="draftOrderFinalized == true">
-  <div *ngFor="let beaver of teams['Beaver']; index as i;">
-  {{ beaver }}
+<div *ngIf="pageloaded == true">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h2>Number of Rounds: {{ draftRoundsDisplay }}</h2>
   </div>
-  <div *ngFor="let wolves of teams['Wolves']; index as i;">
-    {{ wolves }}
-  </div>
-  <div *ngFor="let snipes of teams['Snipes']; index as i;">
-    {{ snipes }}
-  </div>
-  <div *ngFor="let deer of teams['Deer']; index as i;">
-    {{ deer }}
-  </div>
-  <div *ngFor="let bears of teams['Bears']; index as i;">
-    {{ bears }}
-  </div>
-</div>
-
-<!--
-<div *ngFor="let clan of teams[captainList[i].clan]; index as i;">
-  <div *ngFor="let team of teams[clan]">
-    {{ team }}
-  </div>
-</div> -->
-
-
-
-<!-- <div *ngIf="startDraft == true">
-  <button mat-button (click)="startDraft == false">Start Draft</button>
-</div> -->
-<div *ngIf="startDraft == true" fxLayout="column" fxLayoutAlign="center center">
-  <button mat-raised-button (click)="startDraftClick()" color="primary">Start Draft</button>
-</div>
-<div fxLayout="column" fxLayoutAlign="center center">
-  <h1>Draft Order: {{ draftOrder }}</h1>
-  <ol>
-    <li *ngFor="let draft of draftOrder">
-      {{ draft.clan }}
-    </li>
-  </ol>
-</div>
-<div fxLayout="column" fxLayoutAlign="center center">
-  <h1>Round: {{ round }}</h1>
-</div>
-<div fxLayout="column" fxLayoutAlign="center center">
-  <h2>Available Players ( {{ playerList?.length }} )</h2>
-  <mat-nav-list *ngIf="availableListLoaded == true && draftOrderFinalized == true">
-    <mat-list-item (click)="playerSelection(i, player)" *ngFor="let player of playerList | sort: 'stars'; index as i">
-        <a matLine>{{ player?.name }} | <b>{{ player?.stars }}</b></a>
-    </mat-list-item>
-  </mat-nav-list>
-  <!-- <p>
-    Player Count: {{ playerList?.length }}
-  </p> -->
-
-  <!-- <button color="primary" routerLink="/draft" [disabled]="playerList?.length < 5" mat-raised-button>Draft!</button> -->
-  <!-- <div fxLayout="column" fxLayoutAlign="center center" *ngIf="captainList.length > 0">
-    <h1>Captains</h1>
+  <div *ngIf="draftOrderFinalized == false" fxLayout="column" fxLayoutAlign="center center">
+    <h3>Select Drafting Order</h3>
+    <!-- <p *ngFor="let captain of captainList">{{ captain.name }}</p> -->
     <mat-nav-list>
-      <mat-list-item *ngFor="let captain of captainList; index as i">
-          <a matLine>{{ i + 1 }} {{ captain?.name }}</a>
+      <mat-list-item (click)="draftOrderClick(i, captain)" *ngFor="let captain of captainList; index as i">
+          <a matLine>{{ captain?.name }}</a>
       </mat-list-item>
     </mat-nav-list>
-    <button  color="primary" routerLink="/draft" [disabled]="captainList?.length < 3" mat-raised-button>Randomize Captain Selection Order!</button>
+  </div>
+
+  <div *ngIf="draftOrderFinalized == true">
+    <div *ngFor="let beaver of teams['Beaver']; index as i;">
+    {{ beaver }}
+    </div><br>
+    <div *ngFor="let wolves of teams['Wolves']; index as i;">
+      {{ wolves }}
+    </div><br>
+    <div *ngFor="let snipes of teams['Snipes']; index as i;">
+      {{ snipes }}
+    </div><br>
+    <div *ngFor="let deer of teams['Deer']; index as i;">
+      {{ deer }}
+    </div><br>
+    <div *ngFor="let bears of teams['Bears']; index as i;">
+      {{ bears }}
+    </div><br>
+  </div>
+
+  <!--
+  <div *ngFor="let clan of teams[captainList[i].clan]; index as i;">
+    <div *ngFor="let team of teams[clan]">
+      {{ team }}
+    </div>
   </div> -->
+
+
+
+  <!-- <div *ngIf="startDraft == true">
+    <button mat-button (click)="startDraft == false">Start Draft</button>
+  </div> -->
+  <div *ngIf="startDraft == true" fxLayout="column" fxLayoutAlign="center center">
+    <button mat-raised-button (click)="startDraftClick()" color="primary">Start Draft</button>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h1>Draft Order: {{ draftOrder }}</h1>
+    <ol>
+      <li *ngFor="let draft of draftOrder">
+        {{ draft.clan }}
+      </li>
+    </ol>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h1>Round: {{ round }}</h1>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h2>Available Players ( {{ playerList?.length }} )</h2>
+    <mat-nav-list *ngIf="availableListLoaded == true && draftOrderFinalized == true">
+      <mat-list-item (click)="playerSelection(i, player)" *ngFor="let player of playerList | sort: 'stars'; index as i">
+          <a matLine>{{ player?.name }} | <b>{{ player?.stars }}</b></a>
+      </mat-list-item>
+    </mat-nav-list>
+    <!-- <p>
+      Player Count: {{ playerList?.length }}
+    </p> -->
+
+    <!-- <button color="primary" routerLink="/draft" [disabled]="playerList?.length < 5" mat-raised-button>Draft!</button> -->
+    <!-- <div fxLayout="column" fxLayoutAlign="center center" *ngIf="captainList.length > 0">
+      <h1>Captains</h1>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let captain of captainList; index as i">
+            <a matLine>{{ i + 1 }} {{ captain?.name }}</a>
+        </mat-list-item>
+      </mat-nav-list>
+      <button  color="primary" routerLink="/draft" [disabled]="captainList?.length < 3" mat-raised-button>Randomize Captain Selection Order!</button>
+    </div> -->
+  </div>
 </div>

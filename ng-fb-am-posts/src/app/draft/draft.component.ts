@@ -59,6 +59,8 @@ export class DraftComponent implements OnInit {
 
   draftOrderFinalized = false;
 
+  pageloaded = false;
+
   constructor(private playerService: PlayerService, private captainService: CaptainService) { }
 
   ngOnInit() {
@@ -86,6 +88,7 @@ export class DraftComponent implements OnInit {
             }
           }
         }
+        this.pageloaded = true;
         this.availableListLoaded = true;
         this.draftRoundsDisplay = Math.ceil(this.playerList.length / this.captainList.length);
       });
