@@ -1,97 +1,103 @@
-<section class="new-player" fxLayout="column" fxLayoutAlign="center center">
-  <h3>Player Form</h3>
-  <form (ngSubmit)="onSubmit(playerForm)" #playerForm="ngForm">
-    <div>
-      <mat-form-field class="example-full-width">
-        <input autofocus matInput placeholder="Name" [(ngModel)]="player.name" #name name="name" required>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-          <input autofocus matInput placeholder="Stars" [(ngModel)]="player.stars" #name name="stars" required>
+<div style="margin-top: 100px;" fxLayout="row" fxLayoutAlign="center center" *ngIf="pageLoaded == false">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="pageLoaded == true">
+  <section  class="new-player" fxLayout="column" fxLayoutAlign="center center">
+    <h3>Player Form</h3>
+    <form (ngSubmit)="onSubmit(playerForm)" #playerForm="ngForm">
+      <div>
+        <mat-form-field class="example-full-width">
+          <input autofocus matInput placeholder="Name" [(ngModel)]="player.name" #name name="name" required>
         </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="#" [(ngModel)]="player.number1" name="number1" required>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Alt #" [(ngModel)]="player.number2" name="number2">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-select required placeholder="Shirt Size" [(ngModel)]="player.size" name="size">
-          <mat-option *ngFor="let size of sizes" [value]="size.value">
-            {{ size.valueView }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Phone Number" [(ngModel)]="player.phone" name="phone"  required>
-      </mat-form-field>
-      <button color="primary" mat-button type="submit">
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
-  </form>
-</section>
-<section fxLayout="column" fxLayoutAlign="center center">
-  <h6>Player Count: {{ playerList?.length }}</h6>
-</section>
+        <mat-form-field class="example-full-width">
+            <input autofocus matInput placeholder="Stars" [(ngModel)]="player.stars" #name name="stars" required>
+          </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="#" [(ngModel)]="player.number1" name="number1" required>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Alt #" [(ngModel)]="player.number2" name="number2">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select required placeholder="Shirt Size" [(ngModel)]="player.size" name="size">
+            <mat-option *ngFor="let size of sizes" [value]="size.value">
+              {{ size.valueView }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Phone Number" [(ngModel)]="player.phone" name="phone"  required>
+        </mat-form-field>
+        <button color="primary" mat-button type="submit">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </form>
+  </section>
+  <section fxLayout="column" fxLayoutAlign="center center">
+    <h6>Player Count: {{ playerList?.length }}</h6>
+  </section>
 
-<!-- <div fxLayout="column" fxLayoutAlign="center center">
-  <mat-selection-list #players>
-    <mat-list-option *ngFor="let player of playerList">
-      {{player.name}}
-    </mat-list-option>
+  <!-- <div fxLayout="column" fxLayoutAlign="center center">
+    <mat-selection-list #players>
+      <mat-list-option *ngFor="let player of playerList">
+        {{player.name}}
+      </mat-list-option>
 
-  </mat-selection-list>
+    </mat-selection-list>
 
-  <p>
-    Players selected: {{players.selectedOptions.selected.length}} / {{ playerList?.length }}
-  </p>
-</div> -->
+    <p>
+      Players selected: {{players.selectedOptions.selected.length}} / {{ playerList?.length }}
+    </p>
+  </div> -->
 
-<table mat-table [dataSource]="dataSource">
+  <table mat-table [dataSource]="dataSource">
 
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef='let player'> {{player.name}} </td>
-  </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef='let player'> {{player.name}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="stars">
-    <th mat-header-cell *matHeaderCellDef> Stars </th>
-    <td mat-cell *matCellDef='let player'> {{player.stars}} </td>
-  </ng-container>
+    <ng-container matColumnDef="stars">
+      <th mat-header-cell *matHeaderCellDef> Stars </th>
+      <td mat-cell *matCellDef='let player'> {{player.stars}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="#">
-    <th mat-header-cell *matHeaderCellDef> # </th>
-    <td mat-cell *matCellDef='let player'> {{player.number1}} </td>
-  </ng-container>
+    <ng-container matColumnDef="#">
+      <th mat-header-cell *matHeaderCellDef> # </th>
+      <td mat-cell *matCellDef='let player'> {{player.number1}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="alt #">
-    <th mat-header-cell *matHeaderCellDef> Alt # </th>
-    <td mat-cell *matCellDef='let player'> {{player.number2}} </td>
-  </ng-container>
+    <ng-container matColumnDef="alt #">
+      <th mat-header-cell *matHeaderCellDef> Alt # </th>
+      <td mat-cell *matCellDef='let player'> {{player.number2}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="size">
-    <th mat-header-cell *matHeaderCellDef> Size </th>
-    <td mat-cell *matCellDef='let player'> {{player.size}} </td>
-  </ng-container>
+    <ng-container matColumnDef="size">
+      <th mat-header-cell *matHeaderCellDef> Size </th>
+      <td mat-cell *matCellDef='let player'> {{player.size}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="phone">
-    <th mat-header-cell *matHeaderCellDef> Phone </th>
-    <td mat-cell *matCellDef='let player'> {{player.phone}} </td>
-  </ng-container>
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef> Phone </th>
+      <td mat-cell *matCellDef='let player'> {{player.phone}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef> Actions </th>
-    <td mat-cell *matCellDef="let player" >
-      <!-- <a matLine (click)="onDelete(player.$key)">{{ player.name }}</a> -->
-      <button (click)="onDelete(player.$key)" mat-icon-button>
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let player" >
+        <!-- <a matLine (click)="onDelete(player.$key)">{{ player.name }}</a> -->
+        <button (click)="onDelete(player.$key)" mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
 
 <!-- <div fxLayout="column" fxLayoutAlign="center center">
   <mat-nav-list>

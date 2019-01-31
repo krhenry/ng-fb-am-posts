@@ -28,6 +28,8 @@ export class PlayersComponent implements OnInit {
   player = new Player();
   playerList: Player[];
 
+  pageLoaded = false;
+
   sizes: Size[] = [
     { value: 'Small', valueView: 'S' },
     { value: 'Medium', valueView: 'M' },
@@ -55,6 +57,7 @@ export class PlayersComponent implements OnInit {
         this.playerList.push(y as Player);
       });
       this.dataSource = new MatTableDataSource(this.playerList);
+      this.pageLoaded = true;
     });
   }
 
