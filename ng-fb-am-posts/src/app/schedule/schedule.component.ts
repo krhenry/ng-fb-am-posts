@@ -12,8 +12,7 @@ import { CaptainService } from '../services/captain.service';
   styleUrls: ['./schedule.component.css']
 })
 export class ScheduleComponent implements OnInit {
-  parentMessage = 'message from parent';
-
+  parentMessage: string;
   selectedClan: string;
 
   schedule = new Schedule();
@@ -61,6 +60,10 @@ export class ScheduleComponent implements OnInit {
       this.scheduleService.deleteGame(key);
       // this.tostr.warning('Deleted Successfully', 'Question submit');
     }
+  }
+
+  onGame() {
+    this.parentMessage = 'parent message';
   }
 
   onSubmit(scheduleForm: NgForm ) {
