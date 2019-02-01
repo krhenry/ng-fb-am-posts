@@ -22,3 +22,39 @@
     </div>
   </form>
 </section>
+
+<table mat-table [dataSource]="dataSource">
+
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> Date </th>
+    <td mat-cell *matCellDef='let schedule'> {{schedule.date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="time">
+    <th mat-header-cell *matHeaderCellDef> Time </th>
+    <td mat-cell *matCellDef='let schedule'> {{schedule.time}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="home">
+    <th mat-header-cell *matHeaderCellDef> Home </th>
+    <td mat-cell *matCellDef='let schedule'> {{schedule.home}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="away">
+    <th mat-header-cell *matHeaderCellDef> Away </th>
+    <td mat-cell *matCellDef='let schedule'> {{schedule.away}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let player" >
+      <!-- <a matLine (click)="onDelete(player.$key)">{{ player.name }}</a> -->
+      <button (click)="onDelete(player.$key)" mat-icon-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

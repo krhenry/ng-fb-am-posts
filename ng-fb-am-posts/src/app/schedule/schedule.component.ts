@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ScheduleService } from '../services/schedule.service';
 import { Schedule } from '../models/schedule.model';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-schedule',
@@ -15,6 +16,9 @@ export class ScheduleComponent implements OnInit {
 
   pageLoaded = false;
 
+  displayedColumns: string[] = ['date', 'time', 'home', 'away', 'actions'];
+  dataSource = new MatTableDataSource;
+
   constructor(private scheduleService: ScheduleService) { }
 
   ngOnInit() {
@@ -26,9 +30,16 @@ export class ScheduleComponent implements OnInit {
         y['$key'] = element.key;
         this.gameList.push(y as Schedule);
       });
-      // this.dataSource = new MatTableDataSource(this.playerList);
+      this.dataSource = new MatTableDataSource(this.gameList);
       this.pageLoaded = true;
     });
+  }
+
+  onDelete(key: string) {
+    if (confirm('Are you sure to delete this game ?') === true) {
+      this.scheduleService.deleteGame(key);
+      // this.tostr.warning('Deleted Successfully', 'Question submit');
+    }
   }
 
   onSubmit(scheduleForm: NgForm ) {
