@@ -20,6 +20,7 @@ import { CaptainComponent } from './captain/captain.component';
 import { CaptainService } from './services/captain.service';
 import { TeamsComponent } from './teams/teams.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { ScheduleService } from './services/schedule.service';
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import { ScheduleComponent } from './schedule/schedule.component';
     FormsModule,
     FlexLayoutModule
   ],
-  providers: [PlayerService, CaptainService],
+  providers: [PlayerService, CaptainService, ScheduleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

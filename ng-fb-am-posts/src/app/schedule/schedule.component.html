@@ -1,3 +1,24 @@
-<p>
-  schedule works!
-</p>
+<section  class="new-player" fxLayout="column" fxLayoutAlign="center center">
+  <h3>Schedule Form</h3>
+  <form (ngSubmit)="onSubmit(scheduleForm)" #scheduleForm="ngForm">
+    <div>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a Date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input autofocus matInput placeholder="Time" [(ngModel)]="schedule.time" #name name="time" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+          <input autofocus matInput placeholder="Home" [(ngModel)]="schedule.home" #name name="home" required>
+        </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Away" [(ngModel)]="schedule.away" name="away" required>
+      </mat-form-field>
+      <button color="primary" mat-button type="submit">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </form>
+</section>
