@@ -12,6 +12,7 @@ import { CaptainService } from '../services/captain.service';
   styleUrls: ['./schedule.component.css']
 })
 export class ScheduleComponent implements OnInit {
+  parentMessage = 'message from parent';
 
   selectedClan: string;
 

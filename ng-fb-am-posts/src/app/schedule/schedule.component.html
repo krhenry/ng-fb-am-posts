@@ -97,5 +97,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <app-game></app-game>
+  <app-game [childMessage]="parentMessage"></app-game>
 </div>
