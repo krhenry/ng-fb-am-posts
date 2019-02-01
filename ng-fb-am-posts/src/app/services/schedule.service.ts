@@ -15,16 +15,16 @@ export class ScheduleService {
     return this.ScheduleList;
   }
 
-  insertPlayer(schedule: Schedule) {
+  insertGame(schedule: Schedule, date) {
     this.ScheduleList.push({
-      date: schedule.date,
+      date: date,
       time: schedule.time,
       home: schedule.home,
       away: schedule.away
     });
   }
 
-  updatePlayer(schedule: Schedule) {
+  updateGame(schedule: Schedule) {
     this.ScheduleList.update(schedule.$key,
     {
       date: schedule.date,
@@ -34,7 +34,7 @@ export class ScheduleService {
     });
   }
 
-  deleteSchedule($key: string) {
+  deleteGame($key: string) {
     this.ScheduleList.remove($key);
   }
 

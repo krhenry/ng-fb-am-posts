@@ -11,22 +11,35 @@ import { Schedule } from '../models/schedule.model';
 export class ScheduleComponent implements OnInit {
 
   schedule = new Schedule();
+  gameList: Schedule[];
+
+  pageLoaded = false;
 
   constructor(private scheduleService: ScheduleService) { }
 
   ngOnInit() {
+    const x = this.scheduleService.getData();
+    x.snapshotChanges().subscribe(item => {
+      this.gameList = [];
+      item.forEach(element => {
+        const y = element.payload.toJSON();
+        y['$key'] = element.key;
+        this.gameList.push(y as Schedule);
+      });
+      // this.dataSource = new MatTableDataSource(this.playerList);
+      this.pageLoaded = true;
+    });
   }
 
   onSubmit(scheduleForm: NgForm ) {
-    if (scheduleForm.value.number2 === undefined) {
-      scheduleForm.value.number2 = null;
-    }
+    const date = scheduleForm.value.date.toDateString();
+    // console.log(scheduleForm.value.date.toString());
+    console.log(scheduleForm.value.date.toDateString());
+    console.log(scheduleForm);
     if (scheduleForm.valid === true) {
       if (scheduleForm.value.$key == null) {
-        this.scheduleService.insertPlayer(scheduleForm.value);
+        this.scheduleService.insertGame(scheduleForm.value, date);
       }
-      // alert('Thanks for submitting! Data: ' + JSON.stringify(this.player));
-      // this.nameField.nativeElement.focus();
       scheduleForm.resetForm();
     }
   }
