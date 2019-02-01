@@ -6,4 +6,6 @@ export class Schedule {
   time: string;
   home: string;
   away: string;
+  winner: string;
+  score: string;
 }

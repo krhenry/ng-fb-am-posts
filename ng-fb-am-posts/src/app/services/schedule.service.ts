@@ -20,7 +20,9 @@ export class ScheduleService {
       date: date,
       time: schedule.time,
       home: schedule.home,
-      away: schedule.away
+      away: schedule.away,
+      winner: '',
+      score: ''
     });
   }
 
@@ -30,7 +32,9 @@ export class ScheduleService {
       date: schedule.date,
       time: schedule.time,
       home: schedule.home,
-      away: schedule.away
+      away: schedule.away,
+      winner: schedule.winner,
+      score: schedule.score
     });
   }
 

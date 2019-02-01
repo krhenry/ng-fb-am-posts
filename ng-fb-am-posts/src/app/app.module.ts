@@ -21,6 +21,7 @@ import { CaptainService } from './services/captain.service';
 import { TeamsComponent } from './teams/teams.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { ScheduleService } from './services/schedule.service';
+import { StatsComponent } from './stats/stats.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ScheduleService } from './services/schedule.service';
     CaptainComponent,
     ArraySortPipe,
     TeamsComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,

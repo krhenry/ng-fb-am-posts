@@ -6,6 +6,7 @@ import { DraftComponent } from './draft/draft.component';
 import { CaptainComponent } from './captain/captain.component';
 import { TeamsComponent } from './teams/teams.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { StatsComponent } from './stats/stats.component';
 
 const routes: Routes = [
   { path: 'post', component: PostComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'draft', component: DraftComponent },
   { path: 'captain', component: CaptainComponent},
   { path: 'teams', component: TeamsComponent },
-  { path: 'schedule', component: ScheduleComponent }
+  { path: 'schedule', component: ScheduleComponent },
+  { path: 'stats', component: StatsComponent },
 ];
 
 @NgModule({
