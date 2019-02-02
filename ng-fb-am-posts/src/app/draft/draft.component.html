@@ -17,19 +17,49 @@
 
   <div *ngIf="draftOrderFinalized == true">
     <div *ngFor="let beaver of teams['Beaver']; index as i;">
-    {{ beaver }}
+    <!-- {{ beaver }} -->
+      <div *ngIf="i == 0">
+        <h3>{{ beaver }}</h3>
+      </div>
+      <div *ngIf="i !== 0">
+        <p>{{ beaver }}</p>
+      </div>
     </div><br>
     <div *ngFor="let wolves of teams['Wolves']; index as i;">
-      {{ wolves }}
+      <!-- {{ wolves }} -->
+      <div *ngIf="i == 0">
+        <h3>{{ wolves }}</h3>
+      </div>
+      <div *ngIf="i !== 0">
+        <p>{{ wolves }}</p>
+      </div>
     </div><br>
     <div *ngFor="let snipes of teams['Snipes']; index as i;">
-      {{ snipes }}
+      <!-- {{ snipes }} -->
+      <div *ngIf="i == 0">
+        <h3>{{ snipes }}</h3>
+      </div>
+      <div *ngIf="i !== 0">
+        <p>{{ snipes }}</p>
+      </div>
     </div><br>
     <div *ngFor="let deer of teams['Deer']; index as i;">
-      {{ deer }}
+      <!-- {{ deer }} -->
+      <div *ngIf="i == 0">
+        <h3>{{ deer }}</h3>
+      </div>
+      <div *ngIf="i !== 0">
+        <p>{{ deer }}</p>
+      </div>
     </div><br>
     <div *ngFor="let bears of teams['Bears']; index as i;">
-      {{ bears }}
+      <!-- {{ bears }} -->
+      <div *ngIf="i == 0">
+        <h3>{{ bears }}</h3>
+      </div>
+      <div *ngIf="i !== 0">
+        <p>{{ bears }}</p>
+      </div>
     </div><br>
   </div>
 
