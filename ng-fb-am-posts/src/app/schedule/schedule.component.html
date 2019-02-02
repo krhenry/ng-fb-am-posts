@@ -69,15 +69,14 @@
 
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
-      <td mat-cell *matCellDef="let player" >
-        <!-- <a matLine (click)="onDelete(player.$key)">{{ player.name }}</a> -->
-        <button (click)="onGame(player.$key)" mat-icon-button>
+      <td mat-cell *matCellDef="let schedule" >
+        <button (click)="onGame(schedule.home, schedule.away)" mat-icon-button>
           <mat-icon>format_list_numbered</mat-icon>
         </button>
-        <button (click)="onDelete(player.$key)" mat-icon-button>
+        <button (click)="onDelete(schedule.$key)" mat-icon-button>
           <mat-icon>delete</mat-icon>
         </button>
-        <button (click)="onDelete(player.$key)" mat-icon-button>
+        <button (click)="onDelete(schedule.$key)" mat-icon-button>
           <mat-icon>edit</mat-icon>
         </button>
       </td>

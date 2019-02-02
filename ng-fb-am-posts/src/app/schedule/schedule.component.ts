@@ -62,7 +62,8 @@ export class ScheduleComponent implements OnInit {
     }
   }
 
-  onGame() {
+  onGame(home, away) {
+    console.log(home, away);
     this.parentMessage = 'parent message';
   }
 
