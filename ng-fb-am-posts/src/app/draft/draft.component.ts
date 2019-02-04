@@ -5,6 +5,8 @@ import { PlayerService } from '../services/player.service';
 import { orderBy } from 'lodash';
 import { Captain } from '../models/captain.model';
 import { CaptainService } from '../services/captain.service';
+import { DraftService } from '../services/draft.service';
+import { Team } from '../models/team.model';
 
 @Pipe({name: 'sort'})
 export class ArraySortPipe implements PipeTransform {
@@ -38,6 +40,7 @@ export class DraftComponent implements OnInit {
   player = new Player();
   playerList: Player[];
   captainList: Captain[];
+  teamList: Team[];
 
   draftRoundsDisplay: Number; // Displays how many rounds there are
   round = 1; // Shows initial round. Increases after x amount of players choosen (based on captain count)
@@ -61,36 +64,46 @@ export class DraftComponent implements OnInit {
 
   pageloaded = false;
 
-  constructor(private playerService: PlayerService, private captainService: CaptainService) { }
+  constructor(private playerService: PlayerService, private captainService: CaptainService,
+    private draftService: DraftService) { }
 
   ngOnInit() {
+    const t = this.draftService.getData();
     const x = this.playerService.getData();
     const c = this.captainService.getData();
-    x.snapshotChanges().subscribe(item => {
-      this.playerList = [];
+    t.snapshotChanges().subscribe(item => {
+      this.teamList = [];
       item.forEach(element => {
         const y = element.payload.toJSON();
         y['$key'] = element.key;
-        this.playerList.push(y as Player);
+        this.teamList.push(y as Team);
       });
-      c.snapshotChanges().subscribe(it => {
-        this.captainList = [];
-        it.forEach(element => {
+      x.snapshotChanges().subscribe(item => {
+        this.playerList = [];
+        item.forEach(element => {
           const y = element.payload.toJSON();
           y['$key'] = element.key;
-          this.captainList.push(y as Captain);
+          this.playerList.push(y as Player);
         });
-        this.createTeamArr();
-        for (let i = 0; i < this.playerList.length; i++) {
-          for (let j = 0; j < this.captainList.length; j++) {
-            if (this.playerList[i].name === this.captainList[j].name) {
-              this.playerList.splice(i, 1);
+        c.snapshotChanges().subscribe(it => {
+          this.captainList = [];
+          it.forEach(element => {
+            const y = element.payload.toJSON();
+            y['$key'] = element.key;
+            this.captainList.push(y as Captain);
+          });
+          this.createTeamArr();
+          for (let i = 0; i < this.playerList.length; i++) {
+            for (let j = 0; j < this.captainList.length; j++) {
+              if (this.playerList[i].name === this.captainList[j].name) {
+                this.playerList.splice(i, 1);
+              }
             }
           }
-        }
-        this.pageloaded = true;
-        this.availableListLoaded = true;
-        this.draftRoundsDisplay = Math.ceil(this.playerList.length / this.captainList.length);
+          this.pageloaded = true;
+          this.availableListLoaded = true;
+          this.draftRoundsDisplay = Math.ceil(this.playerList.length / this.captainList.length);
+        });
       });
     });
   }
