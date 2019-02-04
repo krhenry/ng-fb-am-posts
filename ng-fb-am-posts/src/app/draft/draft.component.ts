@@ -133,6 +133,10 @@ export class DraftComponent implements OnInit {
     }
   }
 
+  addTeam() {
+    this.draftService.insertTeam('Bears', 'Jeff');
+  }
+
 
   playerSelection(i, player) {
     this.availPlayerCount += 1;
@@ -142,9 +146,9 @@ export class DraftComponent implements OnInit {
       this.round += 1;
     }
 
-    console.log(this.teams);
-    console.log(this.captainList);
-    console.log(this.teams);
+    // console.log(this.teams);
+    // console.log(this.captainList);
+    // console.log(this.teams);
 
     this.teams['' + this.draftOrder[this.draftIndex].clan + ''].push(player.name);
 

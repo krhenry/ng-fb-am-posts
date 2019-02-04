@@ -17,6 +17,7 @@ export class DraftService {
   }
 
   insertTeam(clan, player) {
+    // const teamsRef = firebase.database().ref('teams/' + clan + '/');
     console.log(clan, player);
     this.TeamList.push({
       clan: clan,
