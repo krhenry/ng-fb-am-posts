@@ -134,7 +134,18 @@ export class DraftComponent implements OnInit {
   }
 
   addTeam() {
-    this.draftService.insertTeam('Bears', 'Jeff');
+    // this.draftService.insertTeam('Bears', 'Jeff');
+    // this.draftService.getInfo();
+    // this.draftService.lastTry();
+
+    for (const c in this.teams) {
+      if (c === 'done to stop showing error') { } else {
+        for (let i = 0; i < this.teams[c].length; i++) {
+          this.draftService.insertTeam(c, this.teams[c][i]);
+        }
+      }
+
+    }
   }
 
 

@@ -16,14 +16,14 @@ export class DraftService {
     return this.TeamList;
   }
 
-  insertTeam(clan, player) {
-    // const teamsRef = firebase.database().ref('teams/' + clan + '/');
-    console.log(clan, player);
+  getTeam(clan) {
+    this.TeamList = this.firebase.list('teams/' + clan);
+  }
+
+  insertTeam(clan, name) {
+    this.TeamList = this.firebase.list('teams/' + clan);
     this.TeamList.push({
-      clan: clan,
-      player: player,
-      // color1: captain.color1,
-      // color2: captain.color2
+      player: name
     });
   }
 
