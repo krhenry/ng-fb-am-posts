@@ -134,17 +134,13 @@ export class DraftComponent implements OnInit {
   }
 
   addTeam() {
-    // this.draftService.insertTeam('Bears', 'Jeff');
-    // this.draftService.getInfo();
-    // this.draftService.lastTry();
-
     for (const c in this.teams) {
       if (c === 'done to stop showing error') { } else {
-        for (let i = 0; i < this.teams[c].length; i++) {
-          this.draftService.insertTeam(c, this.teams[c][i]);
+        for (let i = 0; i < Object.keys(this.teams).length; i++) {
+          this.draftService.insertTest(c, this.teams[c]);
+          break;
         }
       }
-
     }
   }
 
@@ -156,10 +152,6 @@ export class DraftComponent implements OnInit {
     if (this.availPlayerCount % this.captainList.length ===  0) {
       this.round += 1;
     }
-
-    // console.log(this.teams);
-    // console.log(this.captainList);
-    // console.log(this.teams);
 
     this.teams['' + this.draftOrder[this.draftIndex].clan + ''].push(player.name);
 
