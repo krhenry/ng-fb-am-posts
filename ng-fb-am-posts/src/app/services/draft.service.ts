@@ -20,16 +20,16 @@ export class DraftService {
     this.TeamList = this.firebase.list('teams/' + clan);
   }
 
-  insertTest(clan, name) {
-    this.TeamList = this.firebase.list('teams/' + clan);
-    this.TeamList.push({
-      player: name
-    });
-  }
+  // insertTest(clan, name) {
+  //   this.TeamList = this.firebase.list('teams/' + clan);
+  //   this.TeamList.push({
+  //     player: name
+  //   });
+  // }
 
   insertTeam(clan, name) {
-    this.TeamList = this.firebase.list('teams/' + clan);
-    this.TeamList.push({
+    const team = this.firebase.database.ref('teams/' + clan);
+    team.set({
       player: name
     });
   }

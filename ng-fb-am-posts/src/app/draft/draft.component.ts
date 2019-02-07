@@ -136,10 +136,7 @@ export class DraftComponent implements OnInit {
   addTeam() {
     for (const c in this.teams) {
       if (c === 'done to stop showing error') { } else {
-        for (let i = 0; i < Object.keys(this.teams).length; i++) {
-          this.draftService.insertTest(c, this.teams[c]);
-          break;
-        }
+        this.draftService.insertTeam(c, this.teams[c]);
       }
     }
   }
