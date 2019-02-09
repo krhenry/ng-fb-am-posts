@@ -13,6 +13,10 @@ import { CaptainService } from '../services/captain.service';
 })
 export class ScheduleComponent implements OnInit {
   parentMessage: string;
+  statClick = false;
+  home: string;
+  away: string;
+
   selectedClan: string;
 
   schedule = new Schedule();
@@ -64,7 +68,10 @@ export class ScheduleComponent implements OnInit {
 
   onGame(home, away) {
     console.log(home, away);
-    this.parentMessage = 'parent message';
+    this.parentMessage = 'parent message test';
+    this.statClick = true;
+    this.home = home;
+    this.away = away;
   }
 
   onSubmit(scheduleForm: NgForm ) {
