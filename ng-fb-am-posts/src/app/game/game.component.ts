@@ -13,8 +13,10 @@ export class GameComponent implements OnInit {
   @Input() home: string;
   @Input() away: string;
 
-  displayedColumns = ['position', 'name', 'weight', 'symbol', 'fav'];
+  // displayedColumns = ['position', 'name', 'weight', 'symbol', 'fav'];
+  displayedColumns = ['position', 'name', 'points', 'threes', 'assists', 'rebounds', 'blocks', 'steals', 'fouls']
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+  ds = new MatTableDataSource(CDATA);
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -40,6 +42,18 @@ export interface Element {
   fav: string;
 }
 
+export interface DATA {
+  position: number;
+  name: string;
+  points: number;
+  threes: number;
+  assists: number;
+  rebounds: number;
+  blocks: number;
+  steals: number;
+  fouls: number;
+}
+
 
 const ELEMENT_DATA: Element[] = [
   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', fav: "Yes" },
@@ -48,18 +62,16 @@ const ELEMENT_DATA: Element[] = [
   { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be', fav: "" },
   { position: 5, name: 'Boron', weight: 10.811, symbol: 'B', fav: "Yes" },
   { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C', fav: "" },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N', fav: "" },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O', fav: "" },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F', fav: "" },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne', fav: "" },
-  { position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na', fav: "" },
-  { position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg', fav: "" },
-  { position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al', fav: "" },
-  { position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si', fav: "" },
-  { position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P', fav: "" },
-  { position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S', fav: "" },
-  { position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl', fav: "" },
-  { position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar', fav: "" },
-  { position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K', fav: "" },
-  { position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca', fav: "" },
+  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N', fav: "" }
+];
+
+// displayedColumns = ['position', 'name', 'points', 'assists', 'rebounds', 'blocks', 'steals', 'fouls']
+
+const CDATA: DATA[] = [
+  { position: 1, name: 'Kyle', points: 22, threes: 5, assists: 3, rebounds: 2, blocks: 2, steals: 2, fouls: 0 },
+  { position: 2, name: 'Gaston', points: 11, threes: 0, assists: 2, rebounds: 0, blocks: 5, steals: 0, fouls: 2 },
+  { position: 3, name: 'Hook', points: 1, threes: 0, assists: 1, rebounds: 0, blocks: 3, steals: 0, fouls: 3 },
+  { position: 4, name: 'Pan', points: 18, threes: 2, assists: 4, rebounds: 6, blocks: 1, steals: 1, fouls: 0 },
+  { position: 5, name: 'Tinker Bell', points: 2, threes: 0, assists: 5, rebounds: 4, blocks: 1, steals: 1, fouls: 0 },
+  { position: 6, name: 'Hercules', points: 2, threes: 0, assists: 5, rebounds: 4, blocks: 1, steals: 1, fouls: 0 },
 ];

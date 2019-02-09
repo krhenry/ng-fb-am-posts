@@ -1,7 +1,159 @@
 <!-- <p>{{childMessage}}, {{statClick}}</p> -->
 {{home}} {{away}}
 
+
 <div class="example-container mat-elevation-z8" *ngIf="statClick == true">
+	<!-- <div class="example-header">
+		<mat-form-field>
+			<input matInput #filter (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+			<button mat-icon-button matSuffix aria-label="clear" *ngIf="filter.value" (click)="filter.value=''; applyFilter('');">
+        <mat-icon>close</mat-icon>
+      </button>
+		</mat-form-field>
+	</div> -->
+
+	<mat-table #table [dataSource]="ds">
+
+		<!-- Position Column -->
+		<ng-container matColumnDef="position">
+			<mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+			<mat-cell *matCellDef="let data"> {{data.position}} </mat-cell>
+		</ng-container>
+
+		<!-- Name Column -->
+		<!-- <ng-container matColumnDef="name">
+			<mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+			<mat-cell *matCellDef="let data">
+				<mat-form-field floatLabel="never">
+					<input matInput placeholder="Name" [value]="data.name" [(ngModel)]="data.name">
+				</mat-form-field>
+			</mat-cell>
+    </ng-container> -->
+
+    <ng-container matColumnDef="name">
+			<mat-header-cell *matHeaderCellDef> Player </mat-header-cell>
+			<mat-cell *matCellDef="let data"> {{data.name}} </mat-cell>
+		</ng-container>
+
+		<!-- <ng-container matColumnDef="points">
+			<mat-header-cell *matHeaderCellDef> PTS </mat-header-cell>
+			<mat-cell *matCellDef="let data"> {{data.points}} </mat-cell>
+    </ng-container> -->
+
+    <ng-container matColumnDef="points">
+			<mat-header-cell *matHeaderCellDef> PTS </mat-header-cell>
+			<mat-cell *matCellDef="let data">
+				<mat-form-field floatLabel="never">
+					<input matInput placeholder="Points" [value]="data.points" [(ngModel)]="data.points">
+				</mat-form-field>
+			</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="threes">
+			<mat-header-cell *matHeaderCellDef> 3s </mat-header-cell>
+			<mat-cell *matCellDef="let data">
+				<mat-form-field floatLabel="never">
+					<input matInput placeholder="3s" [value]="data.threes" [(ngModel)]="data.threes">
+				</mat-form-field>
+			</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="assists">
+			<mat-header-cell *matHeaderCellDef> AST </mat-header-cell>
+			<mat-cell *matCellDef="let data">
+				<mat-form-field floatLabel="never">
+					<input matInput placeholder="Assists" [value]="data.assists" [(ngModel)]="data.assists">
+				</mat-form-field>
+			</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="rebounds">
+			<mat-header-cell *matHeaderCellDef> REB </mat-header-cell>
+			<mat-cell *matCellDef="let data">
+				<mat-form-field floatLabel="never">
+					<input matInput placeholder="Rebounds" [value]="data.rebounds" [(ngModel)]="data.rebounds">
+				</mat-form-field>
+			</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="blocks">
+			<mat-header-cell *matHeaderCellDef> BLK </mat-header-cell>
+			<mat-cell *matCellDef="let data">
+				<mat-form-field floatLabel="never">
+					<input matInput placeholder="Blocks" [value]="data.blocks" [(ngModel)]="data.blocks">
+				</mat-form-field>
+			</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="steals">
+			<mat-header-cell *matHeaderCellDef> STL </mat-header-cell>
+			<mat-cell *matCellDef="let data">
+				<mat-form-field floatLabel="never">
+					<input matInput placeholder="Steals" [value]="data.steals" [(ngModel)]="data.steals">
+				</mat-form-field>
+			</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fouls">
+			<mat-header-cell *matHeaderCellDef> FLS </mat-header-cell>
+			<mat-cell *matCellDef="let data">
+				<mat-form-field floatLabel="never">
+					<input matInput placeholder="Fouls" [value]="data.fouls" [(ngModel)]="data.fouls">
+				</mat-form-field>
+			</mat-cell>
+		</ng-container>
+
+    <!-- <ng-container matColumnDef="threes">
+			<mat-header-cell *matHeaderCellDef> 3s </mat-header-cell>
+			<mat-cell *matCellDef="let data"> {{data.threes}} </mat-cell>
+    </ng-container> -->
+
+    <!-- <ng-container matColumnDef="assists">
+			<mat-header-cell *matHeaderCellDef> AST </mat-header-cell>
+			<mat-cell *matCellDef="let data"> {{data.assists}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="rebounds">
+			<mat-header-cell *matHeaderCellDef> REB </mat-header-cell>
+			<mat-cell *matCellDef="let data"> {{data.rebounds}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="blocks">
+			<mat-header-cell *matHeaderCellDef> BLK </mat-header-cell>
+			<mat-cell *matCellDef="let data"> {{data.blocks}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="steals">
+			<mat-header-cell *matHeaderCellDef> STL </mat-header-cell>
+			<mat-cell *matCellDef="let data"> {{data.steals}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fouls">
+			<mat-header-cell *matHeaderCellDef> FLS </mat-header-cell>
+			<mat-cell *matCellDef="let data"> {{data.fouls}} </mat-cell>
+		</ng-container> -->
+
+
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+	</mat-table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="example-container mat-elevation-z8" *ngIf="statClick == true">
 	<div class="example-header">
 		<mat-form-field>
 			<input matInput #filter (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -11,15 +163,13 @@
 		</mat-form-field>
 	</div>
 
-	<mat-table #table [dataSource]="dataSource">
+	<mat-table #table [dataSource]="ds">
 
-		<!-- Position Column -->
 		<ng-container matColumnDef="position">
 			<mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
 			<mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
 		</ng-container>
 
-		<!-- Name Column -->
 		<ng-container matColumnDef="name">
 			<mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
 			<mat-cell *matCellDef="let element">
@@ -29,13 +179,11 @@
 			</mat-cell>
 		</ng-container>
 
-		<!-- Weight Column -->
 		<ng-container matColumnDef="weight">
 			<mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
 			<mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
 		</ng-container>
 
-		<!-- Symbol Column -->
 		<ng-container matColumnDef="symbol">
 			<mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
 			<mat-cell *matCellDef="let element">
@@ -45,7 +193,6 @@
 			</mat-cell>
 		</ng-container>
 
-		<!-- Fav Column -->
 		<ng-container matColumnDef="fav">
 			<mat-header-cell *matHeaderCellDef> Favorite </mat-header-cell>
 			<mat-cell *matCellDef="let element">
@@ -61,16 +208,7 @@
 		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 		<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 	</mat-table>
-</div>
-
-
-<!-- Copyright 2018 Google Inc. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license -->
-
-
-
-
+</div> -->
 
 
 
