@@ -24,7 +24,7 @@ import { ScheduleService } from './services/schedule.service';
 import { StatsComponent } from './stats/stats.component';
 import { GameComponent } from './game/game.component';
 import { DraftService } from './services/draft.service';
-
+import { TeamService } from './services/team.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,7 @@ import { DraftService } from './services/draft.service';
     FormsModule,
     FlexLayoutModule
   ],
-  providers: [PlayerService, CaptainService, ScheduleService, DraftService],
+  providers: [PlayerService, CaptainService, ScheduleService, DraftService, TeamService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
-
+import { DraftService } from '../services/draft.service';
+import { Team } from '../models/team.model';
+import { TeamService } from '../services/team.service';
 
 @Component({
   selector: 'app-game',
@@ -13,6 +15,8 @@ export class GameComponent implements OnInit {
   @Input() home: string;
   @Input() away: string;
 
+  teamList: any = [];
+
   // displayedColumns = ['position', 'name', 'weight', 'symbol', 'fav'];
   displayedColumns = ['position', 'name', 'points', 'threes', 'assists', 'rebounds', 'blocks', 'steals', 'fouls']
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -24,9 +28,22 @@ export class GameComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  constructor() { }
+  constructor(private teamService: TeamService) { }
 
   ngOnInit() {
+    console.log('gamets');
+    const x = this.teamService.getData();
+    x.snapshotChanges().subscribe(item => {
+      this.teamList = [];
+      item.forEach(element => {
+        const y = element.payload.toJSON();
+        y['$key'] = element.key;
+        this.teamList.push(y as Team);
+      });
+      console.log(this.teamList);
+      // this.dataSource = new MatTableDataSource(this.playerList);
+      // this.pageLoaded = true;
+    });
   }
 
 }
