@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ScheduleService } from '../services/schedule.service';
 import { Schedule } from '../models/schedule.model';
 import { MatTableDataSource } from '@angular/material';
 import { Captain } from '../models/captain.model';
 import { CaptainService } from '../services/captain.service';
+import { GameComponent } from '../game/game.component';
 
 @Component({
   selector: 'app-schedule',
@@ -12,6 +13,8 @@ import { CaptainService } from '../services/captain.service';
   styleUrls: ['./schedule.component.css']
 })
 export class ScheduleComponent implements OnInit {
+  @ViewChild(GameComponent) teamsChild: GameComponent;
+
   parentMessage: string;
   statClick = false;
   home: string;
@@ -67,11 +70,14 @@ export class ScheduleComponent implements OnInit {
   }
 
   onGame(home, away) {
-    console.log(home, away);
     this.parentMessage = 'parent message test';
     this.statClick = true;
     this.home = home;
     this.away = away;
+
+    this.teamsChild.gameDayParent(this.home, this.away);
+    this.home = '';
+    this.away = '';
   }
 
   onSubmit(scheduleForm: NgForm ) {

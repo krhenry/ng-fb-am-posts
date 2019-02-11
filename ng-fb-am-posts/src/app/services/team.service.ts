@@ -14,4 +14,14 @@ export class TeamService {
     return this.TeamList;
   }
 
+  getHomeTeam(home) {
+    this.TeamList = this.firebase.list('teams/' + home);
+    return this.TeamList;
+  }
+
+  getAwayTeam(away) {
+    this.TeamList = this.firebase.list('teams/' + away);
+    return this.TeamList;
+  }
+
 }

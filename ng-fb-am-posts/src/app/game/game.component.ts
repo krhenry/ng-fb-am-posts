@@ -9,13 +9,17 @@ import { TeamService } from '../services/team.service';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
-export class GameComponent implements OnInit {
+export class GameComponent {
   @Input() childMessage: string;
   @Input() statClick: boolean;
   @Input() home: string;
   @Input() away: string;
 
-  teamList: any = [];
+  teamHomeList: any = [];
+  teamAwayList: any = [];
+
+  homeTeam: any = [];
+  awayTeam: any = [];
 
   // displayedColumns = ['position', 'name', 'weight', 'symbol', 'fav'];
   displayedColumns = ['position', 'name', 'points', 'threes', 'assists', 'rebounds', 'blocks', 'steals', 'fouls']
@@ -28,24 +32,59 @@ export class GameComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  constructor(private teamService: TeamService) { }
+  constructor(private teamService: TeamService) {
 
-  ngOnInit() {
-    console.log('gamets');
-    const x = this.teamService.getData();
-    x.snapshotChanges().subscribe(item => {
-      this.teamList = [];
+    // console.log(this.home);
+    // const x = this.teamService.getHomeTeam(this.home);
+    // x.snapshotChanges().subscribe(item => {
+    //   this.teamList = [];
+    //   item.forEach(element => {
+    //     const y = element.payload.toJSON();
+    //     y['$key'] = element.key;
+    //     this.teamList.push(y as Team);
+    //   });
+    //   console.log(this.teamList);
+    //   // this.dataSource = new MatTableDataSource(this.playerList);
+    //   // this.pageLoaded = true;
+    // });
+  }
+
+  gameDayParent(home, away) {
+    this.homeTeam = [];
+    this.awayTeam = [];
+
+    console.log(home, away);
+    const h = this.teamService.getHomeTeam(home);
+    const a = this.teamService.getAwayTeam(away);
+    h.snapshotChanges().subscribe(item => {
+      this.teamHomeList = [];
       item.forEach(element => {
         const y = element.payload.toJSON();
         y['$key'] = element.key;
-        this.teamList.push(y as Team);
+        this.teamHomeList.push(y as Team);
       });
-      console.log(this.teamList);
+      a.snapshotChanges().subscribe(item => {
+        this.teamAwayList = [];
+        item.forEach(element => {
+          const y = element.payload.toJSON();
+          y['$key'] = element.key;
+          this.teamAwayList.push(y as Team);
+        });
+        for (let i = 0; i < Object.keys(this.teamAwayList[0]).length - 1; i++) {
+          this.awayTeam.push(this.teamAwayList[0][i]);
+        }
+        console.log(this.awayTeam);
+      });
+
+      for (let i = 0; i < Object.keys(this.teamHomeList[0]).length - 1; i++) {
+        this.homeTeam.push(this.teamHomeList[0][i]);
+      }
+
+      console.log(this.homeTeam);
       // this.dataSource = new MatTableDataSource(this.playerList);
       // this.pageLoaded = true;
     });
   }
-
 }
 
 
