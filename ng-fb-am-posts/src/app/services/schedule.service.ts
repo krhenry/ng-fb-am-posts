@@ -26,6 +26,20 @@ export class ScheduleService {
     });
   }
 
+  insertGameTest(schedule: Schedule, date, home, away) {
+    console.log('inserttest', name);
+    this.ScheduleList.push({
+      date: date,
+      time: schedule.time,
+      home: schedule.home,
+      away: schedule.away,
+      winner: '',
+      score: '',
+      h: home,
+      a: away
+    });
+  }
+
   updateGame(schedule: Schedule) {
     this.ScheduleList.update(schedule.$key,
     {

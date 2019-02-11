@@ -56,6 +56,7 @@ export class PlayersComponent implements OnInit {
         y['$key'] = element.key;
         this.playerList.push(y as Player);
       });
+      console.log(this.playerList);
       this.dataSource = new MatTableDataSource(this.playerList);
       this.pageLoaded = true;
     });

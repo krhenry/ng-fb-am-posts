@@ -22,9 +22,20 @@ export class GameComponent {
   awayTeam: any = [];
 
   // displayedColumns = ['position', 'name', 'weight', 'symbol', 'fav'];
-  displayedColumns = ['position', 'name', 'points', 'threes', 'assists', 'rebounds', 'blocks', 'steals', 'fouls']
+  displayedColumns = ['position', 'name', 'points', 'threes', 'assists', 'rebounds', 'blocks', 'steals', 'fouls'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   ds = new MatTableDataSource(CDATA);
+
+  displayedColumnsTest = ['position'];
+  dataSourceTest = new MatTableDataSource(this.homeTeam);
+
+  // home datasource table
+  displayedColumnsHome: string[] = ['position', 'name', 'points', 'threes', 'assists', 'rebounds', 'blocks', 'steals', 'fouls'];
+  dataSourceHome = new MatTableDataSource;
+
+  // away datasource table
+  displayedColumnsAway: string[] = ['position', 'name', 'points', 'threes', 'assists', 'rebounds', 'blocks', 'steals', 'fouls'];
+  dataSourceAway = new MatTableDataSource;
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -73,6 +84,7 @@ export class GameComponent {
         for (let i = 0; i < Object.keys(this.teamAwayList[0]).length - 1; i++) {
           this.awayTeam.push(this.teamAwayList[0][i]);
         }
+        this.dataSourceAway = new MatTableDataSource(this.awayTeam);
         console.log(this.awayTeam);
       });
 
@@ -80,6 +92,7 @@ export class GameComponent {
         this.homeTeam.push(this.teamHomeList[0][i]);
       }
 
+      this.dataSourceHome = new MatTableDataSource(this.homeTeam);
       console.log(this.homeTeam);
       // this.dataSource = new MatTableDataSource(this.playerList);
       // this.pageLoaded = true;

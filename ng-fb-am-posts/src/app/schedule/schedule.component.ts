@@ -6,6 +6,19 @@ import { MatTableDataSource } from '@angular/material';
 import { Captain } from '../models/captain.model';
 import { CaptainService } from '../services/captain.service';
 import { GameComponent } from '../game/game.component';
+import { TeamService } from '../services/team.service';
+import { Team } from '../models/team.model';
+
+export interface GAME {
+  name: string;
+  points: number;
+  threes: number;
+  assists: number;
+  rebounds: number;
+  blocks: number;
+  steals: number;
+  fouls: number;
+}
 
 @Component({
   selector: 'app-schedule',
@@ -27,12 +40,16 @@ export class ScheduleComponent implements OnInit {
   captainList: Captain[];
   clanList: any = [];
 
+  homeList: any = [];
+  awayList: any = [];
+
   pageLoaded = false;
 
   displayedColumns: string[] = ['date', 'time', 'home', 'away', 'actions', 'winner', 'score'];
   dataSource = new MatTableDataSource;
 
-  constructor(private scheduleService: ScheduleService, private captainService: CaptainService) { }
+  constructor(private scheduleService: ScheduleService, private captainService: CaptainService,
+    private teamService: TeamService) { }
 
   ngOnInit() {
     const x = this.scheduleService.getData();
@@ -81,16 +98,83 @@ export class ScheduleComponent implements OnInit {
   }
 
   onSubmit(scheduleForm: NgForm ) {
+    const stat = {
+      points: 0,
+      threes: 0
+    };
+
+
     const date = scheduleForm.value.date.toDateString();
     // console.log(scheduleForm.value.date.toString());
-    console.log(scheduleForm.value.date.toDateString());
-    console.log(scheduleForm);
-    if (scheduleForm.valid === true) {
-      if (scheduleForm.value.$key == null) {
-        this.scheduleService.insertGame(scheduleForm.value, date);
-      }
-      scheduleForm.resetForm();
-    }
-  }
+    // console.log(scheduleForm.value.date.toDateString());
+    // console.log(scheduleForm.value);
 
+    // const homeTeam = this.teamService.getHomeTeam(scheduleForm.value.home);
+    // console.log(this.teamService.getHomeTeam(scheduleForm.value.home));
+
+    const h = this.teamService.getHomeTeam(scheduleForm.value.home);
+    const a = this.teamService.getAwayTeam(scheduleForm.value.away);
+    h.snapshotChanges().subscribe(item => {
+      this.homeList = [];
+      item.forEach(element => {
+        const y = element.payload.toJSON();
+        y['$key'] = element.key;
+        this.homeList.push(y as Team);
+      });
+      a.snapshotChanges().subscribe(item => {
+        this.awayList = [];
+        item.forEach(element => {
+          const y = element.payload.toJSON();
+          y['$key'] = element.key;
+          this.awayList.push(y as Team);
+        });
+        const newHome = [];
+        const newAway = [];
+
+        console.log(this.homeList);
+
+        for (let i = 0; i < Object.keys(this.homeList[0]).length - 1; i++ ) {
+          newHome.push(this.homeList[0][i], stat);
+          // newHome.push(stat);
+          console.log(newHome);
+        }
+
+        for (let i = 0; i < Object.keys(this.awayList[0]).length - 1; i++ ) {
+          newAway.push(this.awayList[0][i]);
+        }
+
+        const ho = [];
+
+        for (let i = 0; i < newHome.length; i++) {
+          ho.push({
+            name: newHome[0],
+            points: 0,
+            threes: 0,
+            assists: 0,
+            rebounds: 0,
+            blocks: 0,
+            steals: 0,
+            fouls: 0
+          });
+        }
+
+        console.log('cmon', ho);
+
+        if (scheduleForm.valid === true) {
+          if (scheduleForm.value.$key == null) {
+            // this.scheduleService.insertGameTest(scheduleForm.value, date, newHome, newAway);
+            this.scheduleService.insertGameTest(scheduleForm.value, date, ho, newAway);
+            // newHome.push(stat);
+            console.log(newHome);
+            console.log(newAway);
+
+
+            // this.scheduleService.insertGame(scheduleForm.value, date);
+            // this.scheduleService.insertGameTest(scheduleForm.value, date);
+          }
+          scheduleForm.resetForm();
+        }
+      });
+    });
+  }
 }
