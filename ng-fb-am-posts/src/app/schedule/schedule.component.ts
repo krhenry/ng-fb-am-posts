@@ -134,13 +134,23 @@ export class ScheduleComponent implements OnInit {
         console.log(this.homeList);
 
         for (let i = 0; i < Object.keys(this.homeList[0]).length - 1; i++ ) {
-          newHome.push(this.homeList[0][i], stat);
+          newHome.push(this.homeList[0][i]);
           // newHome.push(stat);
           console.log(newHome);
         }
 
         for (let i = 0; i < Object.keys(this.awayList[0]).length - 1; i++ ) {
-          newAway.push(this.awayList[0][i]);
+          // newAway.push(this.awayList[0][i]);
+          newAway.push({
+            name: this.awayList[0][i],
+            points: 0,
+            threes: 0,
+            assists: 0,
+            rebounds: 0,
+            blocks: 0,
+            steals: 0,
+            fouls: 0
+          });
         }
 
         const ho = [];
@@ -163,7 +173,7 @@ export class ScheduleComponent implements OnInit {
         if (scheduleForm.valid === true) {
           if (scheduleForm.value.$key == null) {
             // this.scheduleService.insertGameTest(scheduleForm.value, date, newHome, newAway);
-            this.scheduleService.insertGameTest(scheduleForm.value, date, ho, newAway);
+            this.scheduleService.insertGameTest(scheduleForm.value, date, newHome, newAway);
             // newHome.push(stat);
             console.log(newHome);
             console.log(newAway);
