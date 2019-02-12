@@ -98,19 +98,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   onSubmit(scheduleForm: NgForm ) {
-    const stat = {
-      points: 0,
-      threes: 0
-    };
-
-
     const date = scheduleForm.value.date.toDateString();
-    // console.log(scheduleForm.value.date.toString());
-    // console.log(scheduleForm.value.date.toDateString());
-    // console.log(scheduleForm.value);
-
-    // const homeTeam = this.teamService.getHomeTeam(scheduleForm.value.home);
-    // console.log(this.teamService.getHomeTeam(scheduleForm.value.home));
 
     const h = this.teamService.getHomeTeam(scheduleForm.value.home);
     const a = this.teamService.getAwayTeam(scheduleForm.value.away);
@@ -134,9 +122,17 @@ export class ScheduleComponent implements OnInit {
         console.log(this.homeList);
 
         for (let i = 0; i < Object.keys(this.homeList[0]).length - 1; i++ ) {
-          newHome.push(this.homeList[0][i]);
-          // newHome.push(stat);
-          console.log(newHome);
+          // newHome.push(this.homeList[0][i]);
+          newHome.push({
+            name: this.homeList[0][i],
+            points: 0,
+            threes: 0,
+            assists: 0,
+            rebounds: 0,
+            blocks: 0,
+            steals: 0,
+            fouls: 0
+          });
         }
 
         for (let i = 0; i < Object.keys(this.awayList[0]).length - 1; i++ ) {
@@ -152,23 +148,6 @@ export class ScheduleComponent implements OnInit {
             fouls: 0
           });
         }
-
-        const ho = [];
-
-        for (let i = 0; i < newHome.length; i++) {
-          ho.push({
-            name: newHome[0],
-            points: 0,
-            threes: 0,
-            assists: 0,
-            rebounds: 0,
-            blocks: 0,
-            steals: 0,
-            fouls: 0
-          });
-        }
-
-        console.log('cmon', ho);
 
         if (scheduleForm.valid === true) {
           if (scheduleForm.value.$key == null) {
