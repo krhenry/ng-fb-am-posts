@@ -68,8 +68,8 @@ export class ScheduleService {
   }
 
   insertGameSet(schedule: Schedule, date, home, away) {
-    date = date.split(' ').join('_');
-    const sched = this.firebase.database.ref('schedule/' + date + '_' + schedule.home + '_' + schedule.away);
+    // date = date.split(' ').join('_');
+    const sched = this.firebase.database.ref('schedule/' + date.split(' ').join('_') + '_' + schedule.home + '_' + schedule.away);
     sched.set({
       date: date,
       time: schedule.time,
