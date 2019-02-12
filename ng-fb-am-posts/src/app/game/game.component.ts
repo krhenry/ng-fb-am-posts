@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { DraftService } from '../services/draft.service';
 import { Team } from '../models/team.model';
@@ -17,6 +17,8 @@ export class GameComponent {
   @Input() date: string;
   @Input() home: string;
   @Input() away: string;
+
+  @ViewChild('pts') ptsFields: ElementRef;
 
   teamHomeList: any = [];
   teamAwayList: any = [];
@@ -121,6 +123,7 @@ export class GameComponent {
 
   statInput(player, type, value, team) {
     console.log(player, type, value, team);
+    this.ptsFields.nativeElement.blur();
   }
 }
 

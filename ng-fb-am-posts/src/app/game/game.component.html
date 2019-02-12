@@ -23,7 +23,7 @@
       <mat-cell *matCellDef="let home">
         <mat-form-field floatLabel="never">
           <!-- <input matInput (click)="statInput('points', home.points, 'home')" [value]="home.points" [(ngModel)]="home.points"> -->
-          <input matInput #pts (keyup.enter)="statInput(home.name, 'points', home.points, 'home')" [value]="home.points" [(ngModel)]="home.points">
+          <input matInput #pts name="pts" (keyup.enter)="statInput(home.name, 'points', home.points, 'home')" [value]="home.points" [(ngModel)]="home.points">
         </mat-form-field>
       </mat-cell>
     </ng-container>
