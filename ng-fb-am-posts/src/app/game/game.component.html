@@ -22,7 +22,8 @@
       <mat-header-cell *matHeaderCellDef> PTS </mat-header-cell>
       <mat-cell *matCellDef="let home">
         <mat-form-field floatLabel="never">
-          <input matInput (click)="statInput('points', home.points, 'home')" [value]="home.points" [(ngModel)]="home.points">
+          <!-- <input matInput (click)="statInput('points', home.points, 'home')" [value]="home.points" [(ngModel)]="home.points"> -->
+          <input matInput #pts (keyup.enter)="statInput(home.name, 'points', home.points, 'home')" [value]="home.points" [(ngModel)]="home.points">
         </mat-form-field>
       </mat-cell>
     </ng-container>
@@ -31,7 +32,7 @@
       <mat-header-cell *matHeaderCellDef> 3s </mat-header-cell>
       <mat-cell *matCellDef="let home">
         <mat-form-field floatLabel="never">
-          <input matInput [value]="home.threes" [(ngModel)]="home.threes">
+          <input matInput #threes (keyup.enter)="statInput(home.name, 'threes', home.threes, 'home')" [value]="home.threes" [(ngModel)]="home.threes">
         </mat-form-field>
       </mat-cell>
     </ng-container>
@@ -40,7 +41,7 @@
       <mat-header-cell *matHeaderCellDef> AST </mat-header-cell>
       <mat-cell *matCellDef="let home">
         <mat-form-field floatLabel="never">
-          <input matInput [value]="home.assists" [(ngModel)]="home.assists">
+          <input matInput #ast (keyup.enter)="statInput(home.name, 'assists', home.assists, 'home')" [value]="home.assists" [(ngModel)]="home.assists">
         </mat-form-field>
       </mat-cell>
     </ng-container>
@@ -49,7 +50,7 @@
       <mat-header-cell *matHeaderCellDef> REB </mat-header-cell>
       <mat-cell *matCellDef="let home">
         <mat-form-field floatLabel="never">
-          <input matInput [value]="home.rebounds" [(ngModel)]="home.rebounds">
+          <input matInput #reb (keyup.enter)="statInput(home.name, 'rebounds', home.rebounds, 'home')" [value]="home.rebounds" [(ngModel)]="home.rebounds">
         </mat-form-field>
       </mat-cell>
     </ng-container>
@@ -58,7 +59,7 @@
       <mat-header-cell *matHeaderCellDef> BLK </mat-header-cell>
       <mat-cell *matCellDef="let home">
         <mat-form-field floatLabel="never">
-          <input matInput [value]="home.blocks" [(ngModel)]="home.blocks">
+          <input matInput #blk (keyup.enter)="statInput(home.name, 'blocks', home.blocks, 'home')" [value]="home.blocks" [(ngModel)]="home.blocks">
         </mat-form-field>
       </mat-cell>
     </ng-container>
@@ -67,7 +68,7 @@
       <mat-header-cell *matHeaderCellDef> STL </mat-header-cell>
       <mat-cell *matCellDef="let home">
         <mat-form-field floatLabel="never">
-          <input matInput [value]="home.steals" [(ngModel)]="home.steals">
+          <input matInput #stl (keyup.enter)="statInput(home.name, 'steals', home.steals, 'home')" [value]="home.steals" [(ngModel)]="home.steals">
         </mat-form-field>
       </mat-cell>
     </ng-container>
@@ -76,7 +77,7 @@
       <mat-header-cell *matHeaderCellDef> FLS </mat-header-cell>
       <mat-cell *matCellDef="let home">
         <mat-form-field floatLabel="never">
-          <input matInput [value]="home.fouls" [(ngModel)]="home.fouls">
+          <input matInput #fls (keyup.enter)="statInput(home.name, 'fouls', home.fouls, 'home')" [value]="home.fouls" [(ngModel)]="home.fouls">
         </mat-form-field>
       </mat-cell>
     </ng-container>
@@ -105,7 +106,7 @@
         <mat-header-cell *matHeaderCellDef> PTS </mat-header-cell>
         <mat-cell *matCellDef="let away">
           <mat-form-field floatLabel="never">
-            <input matInput [value]="away.points" [(ngModel)]="away.points">
+            <input matInput #pts (keyup.enter)="statInput(away.name, 'points', away.points, 'away')" [value]="away.points" [(ngModel)]="away.points">
           </mat-form-field>
         </mat-cell>
       </ng-container>
@@ -114,7 +115,7 @@
         <mat-header-cell *matHeaderCellDef> 3s </mat-header-cell>
         <mat-cell *matCellDef="let away">
           <mat-form-field floatLabel="never">
-            <input matInput [value]="away.threes" [(ngModel)]="away.threes">
+            <input matInput #threes (keyup.enter)="statInput(away.name, 'threes', away.threes, 'away')" [value]="away.threes" [(ngModel)]="away.threes">
           </mat-form-field>
         </mat-cell>
       </ng-container>
@@ -123,7 +124,7 @@
         <mat-header-cell *matHeaderCellDef> AST </mat-header-cell>
         <mat-cell *matCellDef="let away">
           <mat-form-field floatLabel="never">
-            <input matInput [value]="away.assists" [(ngModel)]="away.assists">
+            <input matInput #ast (keyup.enter)="statInput(away.name, 'assists', away.assists, 'away')" [value]="away.assists" [(ngModel)]="away.assists">
           </mat-form-field>
         </mat-cell>
       </ng-container>
@@ -132,7 +133,7 @@
         <mat-header-cell *matHeaderCellDef> REB </mat-header-cell>
         <mat-cell *matCellDef="let away">
           <mat-form-field floatLabel="never">
-            <input matInput [value]="away.rebounds" [(ngModel)]="away.rebounds">
+            <input matInput #reb (keyup.enter)="statInput(away.name, 'rebounds', away.rebounds, 'away')" [value]="away.rebounds" [(ngModel)]="away.rebounds">
           </mat-form-field>
         </mat-cell>
       </ng-container>
@@ -141,7 +142,7 @@
         <mat-header-cell *matHeaderCellDef> BLK </mat-header-cell>
         <mat-cell *matCellDef="let away">
           <mat-form-field floatLabel="never">
-            <input matInput [value]="away.blocks" [(ngModel)]="away.blocks">
+            <input matInput #blk (keyup.enter)="statInput(away.name, 'blocks', away.blocks, 'away')" [value]="away.blocks" [(ngModel)]="away.blocks">
           </mat-form-field>
         </mat-cell>
       </ng-container>
@@ -150,7 +151,7 @@
         <mat-header-cell *matHeaderCellDef> STL </mat-header-cell>
         <mat-cell *matCellDef="let away">
           <mat-form-field floatLabel="never">
-            <input matInput [value]="away.steals" [(ngModel)]="away.steals">
+            <input matInput #stl (keyup.enter)="statInput(away.name, 'steals', away.steals, 'away')" [value]="away.steals" [(ngModel)]="away.steals">
           </mat-form-field>
         </mat-cell>
       </ng-container>
@@ -159,7 +160,7 @@
         <mat-header-cell *matHeaderCellDef> FLS </mat-header-cell>
         <mat-cell *matCellDef="let away">
           <mat-form-field floatLabel="never">
-            <input matInput [value]="away.fouls" [(ngModel)]="away.fouls">
+            <input matInput #fls (keyup.enter)="statInput(away.name, 'fouls', away.fouls, 'away')" [value]="away.fouls" [(ngModel)]="away.fouls">
           </mat-form-field>
         </mat-cell>
       </ng-container>

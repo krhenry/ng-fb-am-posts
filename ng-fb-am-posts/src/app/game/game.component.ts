@@ -119,8 +119,8 @@ export class GameComponent {
     });
   }
 
-  statInput(type, value, team) {
-    console.log('yahh', type, value, team);
+  statInput(player, type, value, team) {
+    console.log(player, type, value, team);
   }
 }
 
