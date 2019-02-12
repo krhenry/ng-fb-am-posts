@@ -15,7 +15,7 @@
 
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Player </mat-header-cell>
-      <mat-cell *matCellDef="let home"> {{ home }} </mat-cell>
+      <mat-cell *matCellDef="let home"> {{ home.name }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="points">
@@ -98,7 +98,7 @@
 
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef> Player </mat-header-cell>
-        <mat-cell *matCellDef="let away"> {{ away }} </mat-cell>
+        <mat-cell *matCellDef="let away"> {{ away.name }} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="points">

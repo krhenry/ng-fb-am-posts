@@ -28,10 +28,13 @@ export interface GAME {
 export class ScheduleComponent implements OnInit {
   @ViewChild(GameComponent) teamsChild: GameComponent;
 
+  // variables for game component
   parentMessage: string;
   statClick = false;
   home: string;
   away: string;
+  date: string;
+  key: string;
 
   selectedClan: string;
 
@@ -86,13 +89,18 @@ export class ScheduleComponent implements OnInit {
     }
   }
 
-  onGame(home, away) {
+  onGame(key, date, home, away) {
     this.parentMessage = 'parent message test';
     this.statClick = true;
+    this.key = key;
+    this.date = date;
     this.home = home;
     this.away = away;
+    // console.log('date', date);
 
-    this.teamsChild.gameDayParent(this.home, this.away);
+    this.teamsChild.gameDayParent(this.key, this.date, this.home, this.away);
+    this.key = '';
+    this.date = '';
     this.home = '';
     this.away = '';
   }
@@ -119,7 +127,7 @@ export class ScheduleComponent implements OnInit {
         const newHome = [];
         const newAway = [];
 
-        console.log(this.homeList);
+        // console.log(this.homeList);
 
         for (let i = 0; i < Object.keys(this.homeList[0]).length - 1; i++ ) {
           // newHome.push(this.homeList[0][i]);
@@ -156,9 +164,6 @@ export class ScheduleComponent implements OnInit {
             this.scheduleService.insertGameSet(scheduleForm.value, date, newHome, newAway);
 
             // newHome.push(stat);
-            console.log(newHome);
-            console.log(newAway);
-
 
             // this.scheduleService.insertGame(scheduleForm.value, date);
             // this.scheduleService.insertGameTest(scheduleForm.value, date);

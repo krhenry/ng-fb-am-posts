@@ -13,6 +13,8 @@ import { ScheduleService } from '../services/schedule.service';
 export class GameComponent {
   @Input() childMessage: string;
   @Input() statClick: boolean;
+  @Input() key: string;
+  @Input() date: string;
   @Input() home: string;
   @Input() away: string;
 
@@ -21,6 +23,9 @@ export class GameComponent {
 
   homeTeam: any = [];
   awayTeam: any = [];
+
+  homeStats: any;
+  awayStats: any;
 
   // displayedColumns = ['position', 'name', 'weight', 'symbol', 'fav'];
   displayedColumns = ['position', 'name', 'points', 'threes', 'assists', 'rebounds', 'blocks', 'steals', 'fouls'];
@@ -61,40 +66,54 @@ export class GameComponent {
     // });
   }
 
-  gameDayParent(home, away) {
+  gameDayParent(key, date, home, away) {
+    // console.log('key', key);
     this.homeTeam = [];
     this.awayTeam = [];
 
-    console.log(home, away);
-    const h = this.teamService.getHomeTeam(home);
-    const a = this.teamService.getAwayTeam(away);
+    // const g = this.scheduleService.getGame(date, home, away);
+    // g.snapshotChanges().subscribe(item => {
+    //   this.game = [];
+    //   item.forEach(element => {
+    //     const y = element.payload.toJSON();
+    //     y['$key'] = element.key;
+    //     this.game.push(y as any);
+    //   });
+    //   console.log('gamee', this.game);
+    // });
+
+    console.log(date, home, away);
+    const h = this.scheduleService.getHomeStats(date, home, away);
+    const a = this.scheduleService.getAwayStats(date, home, away);
     h.snapshotChanges().subscribe(item => {
-      this.teamHomeList = [];
+      // this.teamHomeList = [];
+      this.homeStats = [];
       item.forEach(element => {
         const y = element.payload.toJSON();
         y['$key'] = element.key;
-        this.teamHomeList.push(y as Team);
+        // this.teamHomeList.push(y as any);
+        this.homeStats.push(y as any);
       });
       a.snapshotChanges().subscribe(item => {
-        this.teamAwayList = [];
+        this.awayStats = [];
         item.forEach(element => {
           const y = element.payload.toJSON();
           y['$key'] = element.key;
-          this.teamAwayList.push(y as Team);
+          this.awayStats.push(y as any);
         });
-        for (let i = 0; i < Object.keys(this.teamAwayList[0]).length - 1; i++) {
-          this.awayTeam.push(this.teamAwayList[0][i]);
-        }
-        this.dataSourceAway = new MatTableDataSource(this.awayTeam);
-        console.log(this.awayTeam);
+        // for (let i = 0; i < Object.keys(this.teamAwayList[0]).length - 1; i++) {
+        //   this.awayTeam.push(this.teamAwayList[0][i]);
+        // }
+        this.dataSourceAway = new MatTableDataSource(this.awayStats);
+        console.log('away', this.awayStats);
       });
 
-      for (let i = 0; i < Object.keys(this.teamHomeList[0]).length - 1; i++) {
-        this.homeTeam.push(this.teamHomeList[0][i]);
-      }
+      // for (let i = 0; i < Object.keys(this.teamHomeList[0]).length - 1; i++) {
+      //   this.homeTeam.push(this.teamHomeList[0][i]);
+      // }
 
-      this.dataSourceHome = new MatTableDataSource(this.homeTeam);
-      console.log(this.homeTeam);
+      this.dataSourceHome = new MatTableDataSource(this.homeStats);
+      console.log('home', this.homeStats);
       // this.dataSource = new MatTableDataSource(this.playerList);
       // this.pageLoaded = true;
     });
