@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material';
 import { DraftService } from '../services/draft.service';
 import { Team } from '../models/team.model';
 import { TeamService } from '../services/team.service';
+import { ScheduleService } from '../services/schedule.service';
 
 @Component({
   selector: 'app-game',
@@ -43,7 +44,7 @@ export class GameComponent {
     this.dataSource.filter = filterValue;
   }
 
-  constructor(private teamService: TeamService) {
+  constructor(private teamService: TeamService, private scheduleService: ScheduleService) {
 
     // console.log(this.home);
     // const x = this.teamService.getHomeTeam(this.home);

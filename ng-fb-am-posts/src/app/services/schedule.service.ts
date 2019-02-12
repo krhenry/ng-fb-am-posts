@@ -15,6 +15,11 @@ export class ScheduleService {
     return this.ScheduleList;
   }
 
+  getGame(date, home, away) {
+    this.ScheduleList = this.firebase.list('schedule/' + date + '_' + home + '_' + away);
+    return this.ScheduleList;
+  }
+
   insertGame(schedule: Schedule, date) {
     this.ScheduleList.push({
       date: date,
@@ -29,6 +34,20 @@ export class ScheduleService {
   insertGameTest(schedule: Schedule, date, home, away) {
     console.log('inserttest', name);
     this.ScheduleList.push({
+      date: date,
+      time: schedule.time,
+      home: schedule.home,
+      away: schedule.away,
+      winner: '',
+      score: '',
+      h: home,
+      a: away
+    });
+  }
+
+  insertGameSet(schedule: Schedule, date, home, away) {
+    const sched = this.firebase.database.ref('schedule/' + date + '_' + schedule.home + '_' + schedule.away);
+    sched.set({
       date: date,
       time: schedule.time,
       home: schedule.home,

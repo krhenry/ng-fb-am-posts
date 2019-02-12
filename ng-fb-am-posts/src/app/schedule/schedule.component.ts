@@ -152,7 +152,9 @@ export class ScheduleComponent implements OnInit {
         if (scheduleForm.valid === true) {
           if (scheduleForm.value.$key == null) {
             // this.scheduleService.insertGameTest(scheduleForm.value, date, newHome, newAway);
-            this.scheduleService.insertGameTest(scheduleForm.value, date, newHome, newAway);
+            // this.scheduleService.insertGameTest(scheduleForm.value, date, newHome, newAway);
+            this.scheduleService.insertGameSet(scheduleForm.value, date, newHome, newAway);
+
             // newHome.push(stat);
             console.log(newHome);
             console.log(newAway);
