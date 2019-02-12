@@ -118,6 +118,10 @@ export class GameComponent {
       // this.pageLoaded = true;
     });
   }
+
+  statInput(type, value, team) {
+    console.log('yahh', type, value, team);
+  }
 }
 
 

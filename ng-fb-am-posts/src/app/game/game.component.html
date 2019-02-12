@@ -22,7 +22,7 @@
       <mat-header-cell *matHeaderCellDef> PTS </mat-header-cell>
       <mat-cell *matCellDef="let home">
         <mat-form-field floatLabel="never">
-          <input matInput [value]="home.points" [(ngModel)]="home.points">
+          <input matInput (click)="statInput('points', home.points, 'home')" [value]="home.points" [(ngModel)]="home.points">
         </mat-form-field>
       </mat-cell>
     </ng-container>
