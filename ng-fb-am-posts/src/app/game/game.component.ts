@@ -29,6 +29,10 @@ export class GameComponent {
   homeStats: any;
   awayStats: any;
 
+  dateString: string;
+  homeString: string;
+  awayString: string;
+
   // displayedColumns = ['position', 'name', 'weight', 'symbol', 'fav'];
   displayedColumns = ['position', 'name', 'points', 'threes', 'assists', 'rebounds', 'blocks', 'steals', 'fouls'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -72,6 +76,10 @@ export class GameComponent {
     // console.log('key', key);
     this.homeTeam = [];
     this.awayTeam = [];
+
+    this.dateString = date;
+    this.homeString = home;
+    this.awayString = away;
 
     // const g = this.scheduleService.getGame(date, home, away);
     // g.snapshotChanges().subscribe(item => {
@@ -121,8 +129,14 @@ export class GameComponent {
     });
   }
 
-  statInput(player, type, value, team) {
-    console.log(player, type, value, team);
+  statInput(idx, stats, type, team) {
+    console.log(idx, stats, type, team);
+    if (team === 'home') {
+      // this.scheduleService.updateGameHomeStat('Sat Mar 02 2019', 'Wolves', 'Deer', type, value);
+      this.scheduleService.updateGameHomeStat(idx, this.dateString, this.homeString, this.awayString, stats, 'h');
+    } else if (team === 'away') {
+      this.scheduleService.updateGameHomeStat(idx, this.dateString, this.homeString, this.awayString, stats, 'a');
+    }
     this.ptsFields.nativeElement.blur();
   }
 }
