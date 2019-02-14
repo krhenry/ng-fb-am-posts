@@ -40,7 +40,6 @@ export class PlayersComponent implements OnInit {
     { value: 'XXXX-Large', valueView: 'XXXXL' }
   ];
 
-  // displayedColumns: string[] = ['name', 'number1', 'number2', 'size', 'phone'];
   displayedColumns: string[] = ['name', 'stars', '#', 'alt #', 'size', 'phone', 'actions'];
   dataSource = new MatTableDataSource;
   selection = new SelectionModel<any>(true, []);
@@ -56,7 +55,6 @@ export class PlayersComponent implements OnInit {
         y['$key'] = element.key;
         this.playerList.push(y as Player);
       });
-      console.log(this.playerList);
       this.dataSource = new MatTableDataSource(this.playerList);
       this.pageLoaded = true;
     });
