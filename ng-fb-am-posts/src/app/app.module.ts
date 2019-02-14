@@ -25,6 +25,7 @@ import { StatsComponent } from './stats/stats.component';
 import { GameComponent } from './game/game.component';
 import { DraftService } from './services/draft.service';
 import { TeamService } from './services/team.service';
+import { OrderPropertyPipe } from './pipe/orderProperty.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { TeamService } from './services/team.service';
     TeamsComponent,
     ScheduleComponent,
     StatsComponent,
-    GameComponent
+    GameComponent,
+    OrderPropertyPipe
   ],
   imports: [
     BrowserModule,

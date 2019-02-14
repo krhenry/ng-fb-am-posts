@@ -11,7 +11,9 @@ export class ScheduleService {
 
   getData() {
     // this.playerList = this.firebase.list('employees');
-    this.ScheduleList = this.firebase.list('schedule');
+    this.ScheduleList = this.firebase.list('schedule', ref => {
+      return ref.orderByChild('date');
+    });
     return this.ScheduleList;
   }
 
