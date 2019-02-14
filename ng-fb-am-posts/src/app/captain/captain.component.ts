@@ -61,6 +61,8 @@ export class CaptainComponent implements OnInit {
   constructor(private captainService: CaptainService, private playerService: PlayerService) { }
 
   ngOnInit() {
+    // note: add clan to captain instead of manually doing it.
+
     const c = this.captainService.getData();
     const p = this.playerService.getData();
     c.snapshotChanges().subscribe(item => {
