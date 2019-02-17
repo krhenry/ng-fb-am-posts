@@ -23,7 +23,6 @@ export class TeamsComponent implements OnInit {
         this.teamList.push(y as Team);
       });
 
-      console.log(this.teamList);
       for (let i = 0; i < this.teamList.length; i++) {
         this.teams[this.teamList[i].$key] = [];
 
@@ -34,7 +33,6 @@ export class TeamsComponent implements OnInit {
           this.teams[this.teamList[i].$key].push(this.teamList[i].player[j]);
         }
       }
-      console.log(this.teams);
     });
   }
 }
