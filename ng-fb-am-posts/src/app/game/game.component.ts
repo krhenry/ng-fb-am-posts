@@ -81,7 +81,7 @@ export class GameComponent {
     });
   }
 
-  statInput(idx, stats, type, team) {
+  statInput(idx, stats, team) {
     if (team === 'home') {
       this.scheduleService.updateGameStat(idx, this.dateString, this.homeString, this.awayString, stats, 'h');
     } else if (team === 'away') {
