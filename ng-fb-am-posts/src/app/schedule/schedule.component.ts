@@ -96,7 +96,6 @@ export class ScheduleComponent implements OnInit {
     this.date = date;
     this.home = home;
     this.away = away;
-    // console.log('date', date);
 
     this.teamsChild.gameDayParent(this.key, this.date, this.home, this.away);
     this.key = '';
@@ -127,14 +126,13 @@ export class ScheduleComponent implements OnInit {
         const newHome = [];
         const newAway = [];
 
-        // console.log(this.homeList);
-
         for (let i = 0; i < Object.keys(this.homeList[0]).length - 1; i++ ) {
-          // newHome.push(this.homeList[0][i]);
           newHome.push({
             name: this.homeList[0][i],
             points: 0,
             threes: 0,
+            ftm: 0,
+            fta: 0,
             assists: 0,
             rebounds: 0,
             blocks: 0,
@@ -144,11 +142,12 @@ export class ScheduleComponent implements OnInit {
         }
 
         for (let i = 0; i < Object.keys(this.awayList[0]).length - 1; i++ ) {
-          // newAway.push(this.awayList[0][i]);
           newAway.push({
             name: this.awayList[0][i],
             points: 0,
             threes: 0,
+            ftm: 0,
+            fta: 0,
             assists: 0,
             rebounds: 0,
             blocks: 0,
@@ -159,14 +158,7 @@ export class ScheduleComponent implements OnInit {
 
         if (scheduleForm.valid === true) {
           if (scheduleForm.value.$key == null) {
-            // this.scheduleService.insertGameTest(scheduleForm.value, date, newHome, newAway);
-            // this.scheduleService.insertGameTest(scheduleForm.value, date, newHome, newAway);
             this.scheduleService.insertGameSet(scheduleForm.value, date, newHome, newAway);
-
-            // newHome.push(stat);
-
-            // this.scheduleService.insertGame(scheduleForm.value, date);
-            // this.scheduleService.insertGameTest(scheduleForm.value, date);
           }
           scheduleForm.resetForm();
         }

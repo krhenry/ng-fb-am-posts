@@ -33,18 +33,19 @@ export class GameComponent {
   homeString: string;
   awayString: string;
 
-  // displayedColumns = ['position', 'name', 'weight', 'symbol', 'fav'];
-  displayedColumns = ['position', 'name', 'points', 'threes', 'assists', 'rebounds', 'blocks', 'steals', 'fouls'];
+  // displayedColumns = ['position', 'name', 'points', 'threes', 'ftm', 'fta', 'assists', 'rebounds', 'blocks', 'steals', 'fouls'];
 
   displayedColumnsTest = ['position'];
   dataSourceTest = new MatTableDataSource(this.homeTeam);
 
   // home datasource table
-  displayedColumnsHome: string[] = ['position', 'name', 'points', 'threes', 'assists', 'rebounds', 'blocks', 'steals', 'fouls'];
+  displayedColumnsHome: string[] = ['position', 'name', 'points', 'threes', 'ftm', 'fta',
+  'assists', 'rebounds', 'blocks', 'steals', 'fouls'];
   dataSourceHome = new MatTableDataSource;
 
   // away datasource table
-  displayedColumnsAway: string[] = ['position', 'name', 'points', 'threes', 'assists', 'rebounds', 'blocks', 'steals', 'fouls'];
+  displayedColumnsAway: string[] = ['position', 'name', 'points', 'threes', 'ftm', 'fta',
+   'assists', 'rebounds', 'blocks', 'steals', 'fouls'];
   dataSourceAway = new MatTableDataSource;
 
   constructor(private teamService: TeamService, private scheduleService: ScheduleService) {
@@ -82,9 +83,9 @@ export class GameComponent {
 
   statInput(idx, stats, type, team) {
     if (team === 'home') {
-      this.scheduleService.updateGameHomeStat(idx, this.dateString, this.homeString, this.awayString, stats, 'h');
+      this.scheduleService.updateGameStat(idx, this.dateString, this.homeString, this.awayString, stats, 'h');
     } else if (team === 'away') {
-      this.scheduleService.updateGameHomeStat(idx, this.dateString, this.homeString, this.awayString, stats, 'a');
+      this.scheduleService.updateGameStat(idx, this.dateString, this.homeString, this.awayString, stats, 'a');
     }
     this.ptsFields.nativeElement.blur();
   }

@@ -34,6 +34,24 @@
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="ftm">
+      <mat-header-cell *matHeaderCellDef> FTM </mat-header-cell>
+      <mat-cell *matCellDef="let home; let i = index;">
+        <mat-form-field floatLabel="never">
+          <input matInput #ftm (keyup.enter)="statInput(i, home, 'ftm', 'home')" [value]="home.ftm" [(ngModel)]="home.ftm">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fta">
+      <mat-header-cell *matHeaderCellDef> FTA </mat-header-cell>
+      <mat-cell *matCellDef="let home; let i = index;">
+        <mat-form-field floatLabel="never">
+          <input matInput #fta (keyup.enter)="statInput(i, home, 'fta', 'home')" [value]="home.fta" [(ngModel)]="home.fta">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="assists">
       <mat-header-cell *matHeaderCellDef> AST </mat-header-cell>
       <mat-cell *matCellDef="let home; let i = index;">
@@ -113,6 +131,24 @@
         <mat-cell *matCellDef="let away; let i = index;">
           <mat-form-field floatLabel="never">
             <input matInput #threes (keyup.enter)="statInput(i, away, 'threes', 'away')" [value]="away.threes" [(ngModel)]="away.threes">
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="ftm">
+        <mat-header-cell *matHeaderCellDef> FTM </mat-header-cell>
+        <mat-cell *matCellDef="let away; let i = index;">
+          <mat-form-field floatLabel="never">
+            <input matInput #ftm (keyup.enter)="statInput(i, away, 'ftm', 'away')" [value]="away.ftm" [(ngModel)]="away.ftm">
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="fta">
+        <mat-header-cell *matHeaderCellDef> FTA </mat-header-cell>
+        <mat-cell *matCellDef="let away; let i = index;">
+          <mat-form-field floatLabel="never">
+            <input matInput #fta (keyup.enter)="statInput(i, away, 'fta', 'away')" [value]="away.fta" [(ngModel)]="away.fta">
           </mat-form-field>
         </mat-cell>
       </ng-container>
