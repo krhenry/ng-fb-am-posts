@@ -52,6 +52,15 @@
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="ftp">
+      <mat-header-cell *matHeaderCellDef> % </mat-header-cell>
+      <mat-cell *matCellDef="let home; let i = index;">
+        <mat-form-field floatLabel="never">
+          <input matInput style="color: black" disabled #ftp [value]="home.ftp" [(ngModel)]="home.ftp">
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="assists">
       <mat-header-cell *matHeaderCellDef> AST </mat-header-cell>
       <mat-cell *matCellDef="let home; let i = index;">
@@ -149,6 +158,15 @@
         <mat-cell *matCellDef="let away; let i = index;">
           <mat-form-field floatLabel="never">
             <input matInput #fta (keyup.enter)="statInput(i, away, 'away')" [value]="away.fta" [(ngModel)]="away.fta">
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="ftp">
+        <mat-header-cell *matHeaderCellDef> % </mat-header-cell>
+        <mat-cell *matCellDef="let away; let i = index;">
+          <mat-form-field floatLabel="never">
+            <input matInput style="color: black" disabled #ftp [value]="away.ftp" [(ngModel)]="away.ftp">
           </mat-form-field>
         </mat-cell>
       </ng-container>

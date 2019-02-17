@@ -40,12 +40,12 @@ export class GameComponent {
 
   // home datasource table
   displayedColumnsHome: string[] = ['position', 'name', 'points', 'threes', 'ftm', 'fta',
-  'assists', 'rebounds', 'blocks', 'steals', 'fouls'];
+  'ftp', 'assists', 'rebounds', 'blocks', 'steals', 'fouls'];
   dataSourceHome = new MatTableDataSource;
 
   // away datasource table
   displayedColumnsAway: string[] = ['position', 'name', 'points', 'threes', 'ftm', 'fta',
-   'assists', 'rebounds', 'blocks', 'steals', 'fouls'];
+  'ftp', 'assists', 'rebounds', 'blocks', 'steals', 'fouls'];
   dataSourceAway = new MatTableDataSource;
 
   constructor(private teamService: TeamService, private scheduleService: ScheduleService) {

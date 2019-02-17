@@ -89,6 +89,7 @@ export class ScheduleService {
       threes: stats.threes,
       ftm: stats.ftm,
       fta: stats.fta,
+      ftp: (stats.ftm / stats.fta) * 100,
       points: stats.points,
       rebounds: stats.rebounds,
       fouls: stats.fouls,
