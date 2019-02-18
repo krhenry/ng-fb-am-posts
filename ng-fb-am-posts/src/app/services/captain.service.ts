@@ -19,6 +19,8 @@ export class CaptainService {
     this.CaptainList.push({
       name: captain,
       clan: '',
+      imageURL: ''
+
       // color1: captain.color1,
       // color2: captain.color2
     });
@@ -36,12 +38,14 @@ export class CaptainService {
   // }
 
   updateCaptain(key, clan) {
+    console.log(key, clan);
     this.CaptainList.update(key,
-      {
-        clan: clan,
-        // color1: captain.color1,
-        // color2: captain.color2
-      });
+    {
+      clan: clan.value,
+      imageURL: clan.imageURL
+      // color1: captain.color1,
+      // color2: captain.color2
+    });
   }
 
   deleteCaptain($key: string) {

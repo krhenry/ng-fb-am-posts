@@ -98,6 +98,36 @@
   <button mat-raised-button (click)="captainConfirm()" color="primary">Confirm Captains</button>
 </div>
 
+
+<div *ngIf="captainsSelected == true">
+  <div *ngFor="let captain of captainList; let i = index">
+    <!-- <form (ngSubmit)="onClanSubmit(clanForm, captain.$key, captain.name, captain.clan)" #clanForm="ngForm"> -->
+    <form (ngSubmit)="onClanSubmit(clanForm, captain)" #clanForm="ngForm">
+      <div layout-align="center center" class="example-container">
+        <mat-form-field>
+          <input class="form-control" style="color: black" disabled [(ngModel)]="captain.name" #name name="name" matInput >
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Clan" [(ngModel)]="captain.clan" name="clan">
+            <mat-option class="form-control" *ngFor="let clan of clans" [value]="clan">
+              {{ clan.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button color="primary" mat-button type="submit">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </form>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <button mat-raised-button color="primary">Finish Clan Selection</button>
+  </div>
+</div>
+
+
+
+
 <div *ngIf="captainsSelected == true">
   <div fxLayout="column" fxLayoutAlign="center center">
     <button mat-raised-button (click)="resetCaptains()" color="primary">Reset Captains</button>
@@ -111,7 +141,7 @@
         <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
       </mat-card-header>
       <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-      <img mat-card-image src="https://cdn.pixabay.com/photo/2013/07/12/13/27/beaver-147073__340.png" alt="Photo of a Shiba Inu">
+      <!-- <img mat-card-image src="https://cdn.pixabay.com/photo/2013/07/12/13/27/beaver-147073__340.png" alt="Photo of a Shiba Inu"> -->
       <mat-card-content>
         <!-- <p>
           The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
@@ -122,7 +152,7 @@
       <mat-card-actions>
         <mat-select placeholder="Clans">
           <mat-option (click)="clanSelected(captain, clan.value)" *ngFor="let clan of clans" [value]="clan.value">
-            {{ clan.viewValue }}
+            {{ clan.value }}
           </mat-option>
         </mat-select>
         <button mat-button>LIKE</button>
@@ -130,9 +160,6 @@
       </mat-card-actions>
     </mat-card>
   </div>
-
-
-
 </div>
 
 

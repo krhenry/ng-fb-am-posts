@@ -11,7 +11,7 @@ import { orderBy } from 'lodash';
 
 export interface Clan {
   value: string;
-  viewValue: string;
+  imageURL: string;
 }
 
 @Component({
@@ -41,22 +41,22 @@ export class CaptainComponent implements OnInit {
   selectedClan: string;
   selectedIcon;
   clans: Clan[] = [
-    { value: 'Bearsurl' , viewValue: 'Bears' },
-    { value: 'Wolvesurl' , viewValue: 'Wolves' },
-    { value: 'Snipesurl' , viewValue: 'Snipes'},
-    { value: 'Turtlesurl' , viewValue: 'Turtles' },
-    { value: 'Deerurl' , viewValue: 'Deer' },
-    { value: 'https://cdn.pixabay.com/photo/2013/07/12/13/27/beaver-147073__340.png' , viewValue: 'Beaver'},
-    { value: 'Eel' , viewValue: 'Eel' }
+    { value: 'Bears' , imageURL: '' },
+    { value: 'Wolves' , imageURL: '' },
+    { value: 'Snipes' , imageURL: '' },
+    { value: 'Turtles' , imageURL: '' },
+    { value: 'Deer' , imageURL: '' },
+    { value: 'Beaver' , imageURL: 'https://cdn.pixabay.com/photo/2013/07/12/13/27/beaver-147073__340.png' },
+    { value: 'Eel' , imageURL: '' }
   ];
 
   optionSelected(event) {
     this.selectedIcon = event.value.icon;
   }
 
-  clanSelected(captain, clan) {
-    this.captainService.updateCaptain(captain.$key, clan);
-  }
+  // clanSelected(captain, clan) {
+  //   this.captainService.updateCaptain(captain.$key, clan);
+  // }
 
   constructor(private captainService: CaptainService, private playerService: PlayerService) { }
 
@@ -113,6 +113,13 @@ export class CaptainComponent implements OnInit {
       }
       this.captainsSelected = true;
     }
+  }
+
+  onClanSubmit(clanForm: NgForm, captain) {
+    // console.log(clanForm.value);
+    // console.log(clanForm.value.clan);
+    // console.log(captain.$key, captain.name, captain.clan);
+    this.captainService.updateCaptain(captain.$key, clanForm.value.clan);
   }
 
   resetCaptains() {
