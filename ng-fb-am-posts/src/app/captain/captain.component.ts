@@ -41,12 +41,12 @@ export class CaptainComponent implements OnInit {
   selectedClan: string;
   selectedIcon;
   clans: Clan[] = [
-    { value: 'Bears' , viewValue: 'Bears' },
-    { value: 'Wolves' , viewValue: 'Wolves' },
-    { value: 'Snipes' , viewValue: 'Snipes'},
-    { value: 'Turtles' , viewValue: 'Turtles' },
-    { value: 'Deer' , viewValue: 'Deer' },
-    { value: 'Beaver' , viewValue: 'Beaver'},
+    { value: 'Bearsurl' , viewValue: 'Bears' },
+    { value: 'Wolvesurl' , viewValue: 'Wolves' },
+    { value: 'Snipesurl' , viewValue: 'Snipes'},
+    { value: 'Turtlesurl' , viewValue: 'Turtles' },
+    { value: 'Deerurl' , viewValue: 'Deer' },
+    { value: 'https://cdn.pixabay.com/photo/2013/07/12/13/27/beaver-147073__340.png' , viewValue: 'Beaver'},
     { value: 'Eel' , viewValue: 'Eel' }
   ];
 
