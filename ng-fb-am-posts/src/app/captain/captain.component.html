@@ -98,18 +98,19 @@
   <button mat-raised-button (click)="captainConfirm()" color="primary">Confirm Captains</button>
 </div>
 
-
+<!-- Test One -->
 <div *ngIf="captainsSelected == true">
   <div *ngFor="let captain of captainList; let i = index">
     <!-- <form (ngSubmit)="onClanSubmit(clanForm, captain.$key, captain.name, captain.clan)" #clanForm="ngForm"> -->
-    <form (ngSubmit)="onClanSubmit(clanForm, captain)" #clanForm="ngForm">
+    <form (ngSubmit)="onClanSubmitOne($event, clanForm, captain, i)" #clanForm="ngForm">
       <div layout-align="center center" class="example-container">
         <mat-form-field>
           <input class="form-control" style="color: black" disabled [(ngModel)]="captain.name" #name name="name" matInput >
         </mat-form-field>
         <mat-form-field>
           <mat-select placeholder="Clan" [(ngModel)]="captain.clan" name="clan">
-            <mat-option class="form-control" *ngFor="let clan of clans" [value]="clan">
+            <mat-option class="form-control"
+             *ngFor="let clan of clans" [value]="clan">
               {{ clan.value }}
             </mat-option>
           </mat-select>
@@ -124,6 +125,37 @@
     <button mat-raised-button color="primary">Finish Clan Selection</button>
   </div>
 </div>
+
+
+<div *ngIf="captainsSelected == true">
+    <div *ngFor="let captain of captainList; let i = index">
+      <!-- <form (ngSubmit)="onClanSubmit(clanForm, captain.$key, captain.name, captain.clan)" #clanForm="ngForm"> -->
+      <!-- <form (ngSubmit)="onClanSubmit($event, clanForm, captain, i)" #clanForm="ngForm"> -->
+        <div layout-align="center center" class="example-container">
+          <mat-form-field>
+            <input class="form-control" style="color: black" disabled [(ngModel)]="captain.name" #name name="name" matInput >
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Clan" [(ngModel)]="captain.clan" name="clan">
+              <mat-option class="form-control"
+               *ngFor="let clan of clans" [value]="clan">
+                {{ clan.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- <button color="primary" mat-button type="submit">
+            <mat-icon>add</mat-icon>
+          </button> -->
+          <button color="primary" mat-button (click)="onClanSubmitTwo(captain.$key, captain); $event.preventDefault();">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      <!-- </form> -->
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <button mat-raised-button color="primary">Finish Clan Selection</button>
+    </div>
+  </div>
 
 
 

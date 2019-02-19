@@ -4,7 +4,7 @@ import { Captain } from '../models/captain.model';
 import { CaptainService } from '../services/captain.service';
 import { PlayerService } from '../services/player.service';
 import { Player } from '../models/player.model';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatOptionSelectionChange } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { element } from '@angular/core/src/render3';
 import { orderBy } from 'lodash';
@@ -115,11 +115,43 @@ export class CaptainComponent implements OnInit {
     }
   }
 
-  onClanSubmit(clanForm: NgForm, captain) {
+  onClanSubmitOne(event: Event, clanForm: NgForm, captain, i) {
+    event.preventDefault();
     // console.log(clanForm.value);
+    // console.log(captain);
+    // console.log(i);
+    // console.log('test', this.captainList[0].clan, captain.clan);
     // console.log(clanForm.value.clan);
     // console.log(captain.$key, captain.name, captain.clan);
-    this.captainService.updateCaptain(captain.$key, clanForm.value.clan);
+    const clan = clanForm.value.clan;
+    clanForm.controls['clan'].patchValue(clan.value);
+    // this.captainService.updateCaptain(captain.$key, clanForm.value.clan);
+    this.captainService.updateCaptain(captain.$key, clan);
+    // clanForm.controls['clan'].setValue(captain.clan);
+    clanForm.controls['clan'].patchValue(clan.value);
+
+    // clanForm.controls['clan'].patchValue({
+    //   clan: captain.clan
+    // });
+
+    this.captainList[i].clan = captain.clan;
+  }
+
+  onClanSubmitTwo(event: Event, key, clan) {
+    console.log(key, clan);
+    event.stopPropagation();
+    this.captainService.updateCaptain(key, clan.clan);
+    event.stopPropagation();
+  }
+
+  anotherMethod(event: MatOptionSelectionChange, eve: Event, clan: any, captain) {
+    if (event.source.selected) {
+      console.log('You selected: ' , clan, captain);
+      const clanInfo = clan;
+      // eve.preventDefault();
+      // this.captainService.updateCaptain(captain.$key, clan);
+      this.captainService.updateCaptain(captain.$key, clanInfo);
+    }
   }
 
   resetCaptains() {
